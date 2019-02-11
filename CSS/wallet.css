@@ -789,6 +789,7 @@ table tr:nth-child(even){background:#333;}
     margin:0 20px 10px 0;
 
 }
+#TabExplorer .inputStl,
 #TabDapps .inputStl{
     display: inline-block;
     width: 80px;
@@ -892,6 +893,7 @@ select{
         width: 100%;
     }
     #TabDapps.row,
+    #TabExplorer.row,
     #TabAccounts.row {
         padding-left: 10px;
         padding-right: 10px;

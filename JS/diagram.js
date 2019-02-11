@@ -51,7 +51,9 @@ function DrawDiagram(s)
         if(e)
         {
             var m = document.getElementById(s.id), u = m.getContext("2d"), h = 50, r = 11;
-            if(s.fillStyle ? u.fillStyle = s.fillStyle : u.fillStyle = "#FFF", u.fillRect(0, 0, m.width, m.height), !(e.length <= 0))
+            console.log(s.fillStyle)
+            // if(s.fillStyle ? u.fillStyle = s.fillStyle : u.fillStyle = "rgba(255,255,255,0)", u.fillRect(0, 0, m.width, m.height), !(e.length <= 0))
+            if(u.fillStyle = "rgba(0,0,0,0.7)", u.fillRect(0, 0, m.width, m.height), !(e.length <= 0))
             {
                 var v = 0;
                 "**" === s.name.substr(s.name.length - 2) && (v = 1);
@@ -65,7 +67,7 @@ function DrawDiagram(s)
                 s.zero && (T = 1, w -= s.zero * D, o -= s.zero, l -= s.zero), o = Math.floor(o + .5), u.lineWidth = T ? 3 : 1 < c ? c : 1;
                 var p = h, S = m.height - 15, I = 0, y = void 0, x = void 0;
                 if(s.red || (s.red = "#A00"), T ? H(e, "line", s.red) : (H(e, "red", s.red), 0 < d && H(e, "green", "#0A0")), u.lineWidth = .5,
-                u.beginPath(), u.strokeStyle = "#000", h--, p--, S += 2, u.moveTo(h, r), u.lineTo(p, S), u.moveTo(p, S + w), u.lineTo(m.width - 10,
+                u.beginPath(), u.strokeStyle = "#fff", h--, p--, S += 2, u.moveTo(h, r), u.lineTo(p, S), u.moveTo(p, S + w), u.lineTo(m.width - 10,
                 S + w), u.stroke(), void 0 !== g && (u.beginPath(), u.lineWidth = .5, u.strokeStyle = "#00F", u.moveTo(g, r), u.lineTo(g, S),
                 u.stroke(), void 0 !== y))
                 {
@@ -73,7 +75,7 @@ function DrawDiagram(s)
                     var L = "" + Math.floor(y + .5);
                     u.fillText(L, g - 3, 9);
                 }
-                if(u.fillStyle = "#000", u.fillText(Rigth("          " + o, 8), 0, 8), 0 < o && 0 < l)
+                if(u.fillStyle = "#fff", u.fillText(Rigth("          " + o, 8), 0, 8), 0 < o && 0 < l)
                 {
                     var O = S - r, X = l / o, E = O - Math.floor(X * O), b = E;
                     b < 10 && (b = 10), u.beginPath(), u.moveTo(h - 2, E + r), u.lineTo(h + 2, E + r), u.stroke(), u.strokeStyle = "#00F", u.fillText(Rigth("          " + l,
@@ -106,7 +108,7 @@ function DrawDiagram(s)
             }
         }
     }
-    
+
 function H(e,t,a)
     {
         u.beginPath(), u.moveTo(h, m.height - 15), u.strokeStyle = a;

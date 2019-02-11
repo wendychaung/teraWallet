@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TERA Light</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="./tera.ico" type="image/vnd.microsoft.icon">
+
+    <link rel="stylesheet" href="newstyle/base.css">
+    <link rel="stylesheet" href="newstyle/main.css">
+    <link rel="stylesheet" href="newstyle/vendor.css">
+    <link rel="stylesheet" href="newstyle/style.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/wallet.css">
+
+    <script type="text/javascript" src="./JS/coinlib.js"></script>
+    <script type="text/javascript" src="./JS/client.js"></script>
+    <script type="text/javascript" src="./JS/sha3.js"></script>
+    <script type="text/javascript" src="./JS/crypto-client.js"></script>
+    <script type="text/javascript" src="./JS/terahashlib.js"></script>
+    <script type="text/javascript" src="./JS/wallet-web.js"></script>
+    <script type="text/javascript" src="./JS/wallet-lib.js"></script>
+    <script type="text/javascript" src="./JS/diagram.js"></script>
+    <script type="text/javascript" src="./JS/main.js"></script>
+
+    <!--<script type="text/javascript" src="./JS/sign-lib-min.js"></script>-->
+
+    <script>
+//        window.WEBWALLET=1;
+        var NumAccountList=0;
+        //Pagination
+        var SaveIdArr=["idAccount","idTo","idSumSend","idDescription","idCurTabName","idPubKey","idPrivKey","idViewBlockNum","idViewAccountNum","idViewDappNum"];
+        var CONFIG_DATA={};
+        CONFIG_DATA={PRICE_DAO:{NewAccount:10}};
+        var CountViewRows=20;
+        var DefAccounts={BlockName:"idPaginationAccount", NumName:"idViewAccountNum", TabName:"explorer_accounts",APIName:"GetAccountList"};
+        var DefBlock={BlockName:"idPaginationBlock", NumName:"idViewBlockNum", TabName:"explorer_blocks",APIName:"GetBlockList"};
+        var DefDapps={BlockName:"idPaginationDapps", NumName:"idViewDappNum", TabName:"dapps_list",APIName:"GetDappList",CountViewRows:10};
+        function SetImg() {};
+        window.onload=function() {
+            LoadSignLib();
+
+            if(localStorage["NETWORK"] || window.location.protocol==="file:") {
+                OnLoad();
+            } else {
+                GetData("/GetCurrentInfo",{}, function (Data) {
+                    if(Data && Data.result) {
+                        localStorage["NETWORK"]=Data.NETWORK;
+                        console.log("Default network: "+Data.NETWORK);
+                        OnLoad();
+                    }
+                });
+            }
+        };
+        //TAB TAB
+        var TabArr=[{name:"Tabfirst"},{name:"TabAccounts"},{name:"TabSend"},{name:"TabDapps"}, {name:"TabExplorer"},{name:"TabLogo"}];
+        //CONFIG
+        var FirstAccountsData=1;
+        //Accounts
+        var CURRENCY,NAME,SMART;
+        //EXPLORER
+        var FirstCallDiagram=1;
+        //Diagrams
+        var DiagramArr= [{name:"MAX:ALL_NODES",text:"All nodes count",value:0,red:"#1d506b"}, {name:"MAX:HASH_RATE_G",text:"HashRate Gh/s",value:0,red:"#286b16"},];
+        //SEND
+        setInterval(CheckSending,1000);
+    </script>
+
+
+</head>
+<body>
+
+<header id="main-header" class="main-header">
+    <div class="row">
+        <div class="logo" id="logo">
+            <a href="#">TERA</a>
+        </div>
+    </div>
+
+    <a id="menu-toggle" href="javascript:void(0)" onclick="toggleButton(this)" class="menu-toggle"><span>Menu</span></a>
+</header>
+<nav id="menu-nav-wrap" class="">
+    <h5>Site Pages</h5>
+    <ul class="nav-list">
+        <li><a href="javascript:void(0)" id="MTabfirst" onclick="SelectTab('Tabfirst',1)">HOME</a></li>
+        <li><a href="javascript:void(0)" id="MTabAccounts" onclick="SelectTab('TabAccounts',1)">ACCOUNTS</a></li>
+        <li><a href="javascript:void(0)" id="MTabSend" onclick="SelectTab('TabSend',1)">SEND</a></li>
+        <li><a href="javascript:void(0)" id="MTabDapps" onclick="SelectTab('TabDapps',1)">DAPPS</a></li>
+        <li><a href="javascript:void(0)" id="MTabExplorer" onclick="SelectTab('TabExplorer',1)">EXPLORER</a></li>
+    </ul>
+</nav>
+<main id="main-404-content" class="main-content-static">
+
+    <div class="content-wrap">
+        <div class="shadow-overlay"></div>
+        <div class="main-content">
+            <div class="row" id="Tabfirst">
+                <div class="col-twelve">
+                    <input id="idCurTabName" value="TabInfo" type="hidden">
+                    <h1 class="kern-this">tera wallet</h1>
+
+                    <div id="idStatus" class="status">
+                    </div>
+                    <div class="search">
+                        <a id="idNetwork" onclick="ChangeNetwork()" class="animated-button victoria-two" href="javascript:void(0)"></a>
+                    </div>
+                </div>
+                <footer>
+                    <div class="col-seven tab-full social-links pull-right">
+                        <ul>
+                            <li><a href="https://terafoundation.org/" title="web"><i class="fa fa-home"></i></a></li>
+                            <li><a href="https://github.com/terafoundation/wallet" title="GitHub"><i class="fa fa-github"></i></a></li>
+                            <li><a href="https://twitter.com/terafoundation" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://bitcointalk.org/index.php?topic=4573801.0" title="ANN"><i class="fa fa-bitcoin"></i></a></li>
+                            <li><a href="https://web.telegram.org/#/im?p=@terafoundation"><i class="fa fa-telegram" aria-hidden="true"></i></a></li>
+                            <li><a href="https://discord.gg/CvwrbeG"><span class="discord"></span></a></li>
+                        </ul>
+                    </div>
+                </footer>
+            </div>
+            <div class="row" id="TabAccounts" style="display: none;">
+                <input type="hidden" id="idPrivKey">
+                <ul id="idKeys">
+                    <li id="WalRow1">
+                        <label class="label">Wallet:</label>
+                        <button id="idPrivKeyButton" onclick="OpenWallet()" class="inputBtn">Wallet opened: </button>
+                        <a href="javascript:void(0)" onclick="SetVisibleItemsKeys(1)" class="animated-button accounts">Edit...</a>
+                    </li>
+                    <li id="WalRow2" style="display: none">
+                        <label class="label">Private key:</label>
+                        <input type="search" id="idPrivKeyEdit" class="inputStl" oninput="SetPubKey(1);">
+                        <a href="javascript:void(0)" onclick="OnPrivKeyOK()" class="animated-button accounts">OK</a>
+                        <a href="javascript:void(0)" onclick="SetVisibleItemsKeys(0)" class="animated-button accounts">Cancel</a>
+                    </li>
+                    <li id="WalRow3" style="display: none">
+                        <label class="label">Pub key:</label>
+                        <input type="search" id="idPubKey" class="inputStl" readonly>
+                    </li>
+                    <li id="WalRow4" style="display: none">
+                        <a href="javascript:void(0)" class="animated-button accounts key" onclick="OnPrivKeyNew()">Generate key</a>
+                        <input type="checkbox" id="idShowPubKey" oninput="SetVisibleItemsKeys(1)"> <label
+                            for="idShowPubKey">Show pub key</label>
+                            <!--Set password:<input class="bigs" type="search" id="idProtKey">-->
+                    </li>
+                </ul>
+                    <div id="idStatus2" class="status2" style="display:none;"></div>
+                    <div> <a href="javascript:void(0)" class="animated-button accounts" onclick="ConnectWebWallet(1)"> Reconnect</a>
+                    <a href="javascript:void(0)" class="animated-button accounts" onclick="ViewNewAccount()"> New account...</a>
+                    <ul id="idAccountEdit" class="reconnet" style="display: none;">
+                        <li>
+                            <label class="label">Public name:</label><input class="inputStl" type="text" id="idAccountName">
+                        </li>
+                       <li>
+                           <label class="label">Currency:</label>
+                           <div class="ss-custom-select">
+                               <select size="1"  id="idAccountCur" class="selectstl">
+                                   <option value="0">TERA</option>
+                               </select>
+                           </div>
+                       </li>
+                        <li>
+                            <a href="javascript:void(0)" class="animated-button accounts" onclick="OnSetAccount(1)">OK</a>
+                            <a href="javascript:void(0)" class="animated-button accounts" onclick="OnSetAccount(0)">Cancel</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="w100p">
+                    <table id="grid_accounts" >
+                        <tr>
+                            <th id="Item.Num" class="num">ID</th>
+                            <th id="SUM_TO_STRING(Item.Value)" class="sum bold">Amount</th>
+                            <th id="CurrencyNameItem(Item)" data-name="Currency" class="cur hint">Currency</th>
+                            <th id="Item.Name" data-name="Account name" class="accname hint">Name</th>
+                            <!--<th id="Item.Adviser" data-name="Adviser" class="snum hint">Adv</th>-->
+                            <th id="(RetChangeSmart(Item))" data-name="Smart contract (DApp)" class="smart hint">Smart</th>
+                        </tr>
+                    </table>
+                    <div id="idMyTotalSum"></div>
+                </div>
+
+            </div>
+            <div class="row" id="TabSend" style="display: none;">
+                <div id="idSendList"> </div>
+                <ul>
+                    <li>
+                        <label class="label">From account:</label>
+                        <div class="ss-custom-select">
+                            <select size="1"  id="idAccount" oninput="OnEditTransactionFields(); CheckSending();">
+                            </select>
+                        </div>
+                        <div id="idNameTo" class="smallbold"></div>
+                    </li>
+                    <li>
+                        <label class="label">Pay to:</label>
+                        <input type="text" class="inputStl" id="idTo" value="" oninput="OnEditIdTo()" placeholder="Payee (required)" >
+                    </li>
+                    <li>
+                        <label class="label">Amount:</label>
+                        <input type="number" class="inputStl" id="idSumSend" value="" step=0 min=0 max=1000000000 oninput="OnEditTransactionFields()">&nbsp;
+                        <a href="javascript:void(0)" style="font-family: monospace;"   class="animated-button accounts" onclick="SetAllSum()"><-</a>
+                        <strong id="idCoinName"></strong>
+                    </li>
+                    <li>
+                        <label class="label">Description<br>(optional):</label>
+                        <textarea id="idDescription" rows="4" oninput="CheckLengthAccDesription('idDescription',200);OnEditTransactionFields()"></textarea>
+                        <div id="idAttach"> </div>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="ClearTransaction()" class="animated-button accounts">Clear</a>
+                        <a href="javascript:void(0)" onclick="EditJSONTransaction();SetImg(this,'edit_transaction');" class="animated-button accounts" id="idDown">Edit JSON</a>
+                        <a href="javascript:void(0)" onclick="SendMoneyBefore()" class="animated-button accounts" id="idSendButton" >Send</a>
+                    </li>
+                </ul>
+                <!--<table class="form_input">-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td style="min-width: 115px">From account</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<select size="1" id="idAccount" oninput="OnEditTransactionFields(); CheckSending();">&ndash;&gt;-->
+                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>&nbsp;</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td><DIV id="idNameTo" class="smallbold"></DIV></td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>Pay to</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input style="float: left" type="string" id="idTo" value="" oninput="OnEditIdTo()" placeholder="Payee (required)" >&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>Amount</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="number" id="idSumSend" value="" step=0 min=0 max=1000000000 oninput="OnEditTransactionFields()">&nbsp;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button style="font-family: monospace;" onclick="SetAllSum()"><-</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<B id="idCoinName"></B>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>Description (optional)</td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<textarea id="idDescription" rows="4" oninput="CheckLengthAccDesription('idDescription',200);OnEditTransactionFields()"></textarea>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div id="idAttach"> </div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="button" onclick="ClearTransaction()" class="bsend bt" value="Clear">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="button" onclick="EditJSONTransaction();SetImg(this,'edit_transaction');" class="bsend bt" value="Edit JSON" id="idDown">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<input type="button" onclick="SendMoneyBefore()" class="bsend bt" id="idSendButton" value="Send" >&ndash;&gt;-->
+                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
+                <!--</table>-->
+                <div id="edit_transaction" style="display: none">
+                    <div>
+                        <textarea id="idTransaction" rows="20" onkeyup="StartEditTransactionJSON()" onchange="StartEditTransactionJSON()"></textarea>
+                    </div>
+                    <a>
+                        <a href="javascript:void(0)" onclick="SignJSON()" class="animated-button accounts" id="idSignJSON">Sign JSON</a>
+                        <a href="javascript:void(0)" onclick="SendMoneyJSON()" class="animated-button accounts" >Send from JSON</a>
+                    </div>
+
+                </div>
+
+                <script>
+                  function SetAllSum()
+                  {
+                    var Item=MapAccounts[$("idAccount").value];
+                    if(Item)
+                      $("idSumSend").value=FLOAT_FROM_COIN(Item.Value);
+                  }
+                </script>
+
+            </div>
+
+            <DIV class="row" id="TabHistory" style="display: none;">
+            </DIV>
+
+
+            <DIV class="row" id="TabDapps" style="display: none">
+
+
+                <BR>
+                <DIV id="idPaginationDapps" style="display: block">
+                    <!--Category:-->
+                    <!--<select size="1" id="idCategory" onchange="ViewCurrent(DefDapps)">-->
+                    <!--</select>-->
+                    <!--<BR>-->
+
+                    <input type="button" onclick="ViewBegin(DefDapps)" class="btdoitm bt" value="|<-">
+                    <input type="button" onclick="ViewPrev(DefDapps)" class="btdoit bt" value="<< Prev">
+                    <input type="number" id="idViewDappNum" style="text-align: center" value="0" min=0 max=1000000000 onchange="ViewCurrent(DefDapps)">
+                    <input type="button" onclick="ViewNext(DefDapps,CONFIG_DATA.MaxDappsID)" class="btdoit bt" value="Next >>">
+                    <input type="button" onclick="ViewEnd(DefDapps,CONFIG_DATA.MaxDappsID)" class="btdoitm bt" value="->|">
+
+                    <table id="dapps_list" class="grid">
+                        <tr>
+                            <th id="(RetNumDapp(Item))" class="num">ID</th>
+                            <th id="(RetOpenDapps(Item,0,0))" class="dappname">Name</th>
+                            <th id="Item.Description" class="code dappdesc">Description</th>
+                            <th id="(RetCategory(Item))" class="">Category</th>
+
+                            <th id="RetBaseAccount(Item)" class="num">Base Account</th>
+                            <th id="Item.Owner" class="num">Owner</th>
+                            <th id="RetBool(Item.TokenGenerate)" class="bool">Token generate</th>
+                            <!--<th id="Item.ISIN" class="num">ISIN</th>-->
+                            <th id="(RetOpenBlock(Item.BlockNum,1))" class="num">Block Num</th>
+
+                        </tr>
+                    </table>
+
+
+                </DIV>
+
+            </DIV>
+
+            <DIV class="row" id="TabExplorer" align="center" style="display: none;">
+                <!--<iframe src="/explorer.html" style="width: 100%;height: 100vh"></iframe>-->
+                <DIV id="idCurrentBlockNum"></DIV>
+
+                <button onclick="ViewCurrent(DefAccounts,1,this);" class="btview">Accounts</button>
+                <button onclick="ViewCurrent(DefBlock,1,this)" class="btview">Blocks & Tr</button>
+                <!--<button onclick="ViewCurrent(DefBlock,1,this)" class="btview">DApps</button>-->
+                <button onclick="ViewCounters(this)" class="btview">Counters</button>
+
+                <DIV>
+                    <DIV id="idPaginationAccount" style="display: none">
+                        <BR>
+                        <button onclick="ViewBegin(DefAccounts)" class="btnav">|<-</button>
+                        <button onclick="ViewPrev(DefAccounts)" class="btnav"><< Prev</button>
+                        <input type="number" class="pag_num" id="idViewAccountNum" style="text-align: center" value="0" min=0 onchange="ViewCurrent(DefAccounts)">
+                        <button onclick="ViewNext(DefAccounts,CONFIG_DATA.MaxAccID)" class="btnav">Next >></button>
+                        <button onclick="ViewEnd(DefAccounts,CONFIG_DATA.MaxAccID)" class="btnav">->|</button>
+
+                        <table id="explorer_accounts" class="grid">
+                            <tr>
+                                <th id="Item.Num" class="num">ID</th>
+                                <th id="SUM_TO_STRING(Item.Value)" class="sum">Amount</th>
+                                <th id="CurrencyNameItem(Item)" class="cur">Cur</th>
+                                <th id="Item.Name" class="accname">Name</th>
+                                <th id="Item.PubKeyStr" class="hash pubkey">PubKey</th>
+                                <th id="Item.Value.OperationID" class="num">Operation</th>
+                                <th id="Item.Value.Smart" class="num">Smart</th>
+                                <th id="(RetOpenBlock(Item.BlockNumCreate,1))" class="num">Block Num</th>
+                            </tr>
+                        </table>
+
+                    </DIV>
+
+
+
+                    <DIV id="idPaginationBlock" style="display: none">
+                        <BR>
+                        <DIV>Blocks<BR></DIV>
+                        <button onclick="ViewBegin(DefBlock)" class="btnav">|<-</button>
+                        <button onclick="ViewPrev(DefBlock)" class="btnav"><< Prev</button>
+                        <input type="number" class="pag_num" id="idViewBlockNum" style="text-align: center" value="0" min=0 onchange="ViewCurrent(DefBlock)">
+                        <button onclick="ViewNext(DefBlock,CONFIG_DATA.MaxNumBlockDB)" class="btnav">Next >></button>
+                        <button onclick="ViewEnd(DefBlock,CONFIG_DATA.MaxNumBlockDB)" class="btnav">->|</button>
+
+                        <table id="explorer_blocks" class="grid">
+                            <tr>
+                                <th id="(RetOpenBlock(Item.BlockNum,Item.TrDataLen))" class="num">Num</th>
+                                <th id="(DateFromBlock(Item.BlockNum))" class="date">Date</th>
+                                <th id="GetHexFromArr(Item.TreeHash)" class="hash">Data Hash</th>
+                                <th id="GetHexFromArr(Item.PowHash)" class="hash">PowHash</th>
+                                <th id="GetHexFromArr(Item.Hash)" class="hash">Block Hash</th>
+                                <th id="Item.TrDataLen" class="num">Bytes</th>
+                                <th id="Item.Power" class="num">Pow</th>
+                                <th id="Item.Miner" class="num">Miner</th>
+                            </tr>
+                        </table>
+                    </DIV>
+
+                    <DIV id="idStatBlock" style="display: none">
+                        <BR>
+
+                        <DIV id="diagr_content" align='center'>
+                            <DIV id="diargams" align='center'>
+                            </DIV>
+                        </DIV>
+
+                    </DIV>
+
+                </DIV>
+                <BR>
+
+            </DIV>
+        </div>
+    </div>
+    <DIV id="idBlockOnSend" style="display: none">
+        <DIV align="center">
+            Send <B id="idOnSendText"></B> ?
+            <BR>
+            <button onclick="SendMoney2()" id="idBtOnSend" class="radius">Send</button>
+            <button onclick='SetVisibleBlock("idBlockOnSend",0);' class="radius">Cancel</button>
+            <BR>
+            <DIV align="left">
+                <DIV style="font-size: smaller"><input type="checkbox" id="idWhiteOnSend"/> Add this account to white list</DIV>
+            </DIV>
+        </DIV>
+    </DIV>
+
+    <!--<DIV id="idStableScroll" align='center'>-->
+        <!--<A href="https://terafoundation.org/">Web</A>-->
+        <!--<A href="https://bitcointalk.org/index.php?topic=4573801.0">ANN</A>-->
+        <!--<A href="https://twitter.com/terafoundation">Twitter</A>-->
+        <!--<A href="https://web.telegram.org/#/im?p=@terafoundation">Telegram</A>-->
+        <!--<A href="https://discord.gg/CvwrbeG">Discord</A>-->
+        <!--<A href="https://github.com/terafoundation/wallet">GitHub</A>-->
+        <!--&lt;!&ndash;progr76@gmail.com&ndash;&gt;-->
+    <!--</DIV>-->
+
+</main>
+<script type="text/javascript" src="./JS/custom.js"></script>
+</body>
+</html>
+
+

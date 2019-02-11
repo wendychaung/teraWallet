@@ -1,0 +1,914 @@
+﻿ul,li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+input,button{
+    outline: none;
+}
+table{
+    border-collapse: collapse;
+    width:100%;
+    /*max-width: 800px;*/
+    color: #e7e7e7;
+}
+table th,table td{
+    border: 1px solid #505050;
+    font-size: 14px;
+}
+table th{
+    /*background: #000;*/
+    background: #393939;
+    color: #fff;
+    text-shadow: 1px 1px 0 #000;
+    border: 1px solid #2B2B2B;
+    border-bottom: 2px solid #2B2B2B;
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px 0;
+}
+table td{
+    text-align: left;
+    padding:10px;
+    word-wrap:break-word;
+
+}
+table tr:nth-child(odd){background:#393939;}
+table tr:nth-child(even){background:#333;}
+
+#Tabfirst{
+    position: relative;
+    height: 100vh;
+}
+#TabAccounts,#TabSend,#TabHistory,#TabDapps,#TabExplorer{
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 110px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/*.grid th, .grid td*/
+/*{*/
+    /*border: 1px solid #264378;*/
+    /*padding: 4px;*/
+/*}*/
+/*.grid td*/
+/*{*/
+    /*width: 60px;*/
+    /*vertical-align:top;*/
+/*}*/
+
+/*.bold*/
+/*{*/
+    /*font-weight: 700;*/
+/*}*/
+
+/*.smallbold*/
+/*{*/
+    /*font-weight: 600;*/
+/*}*/
+
+
+
+/*td.sum*/
+/*{*/
+    /*text-align: right;*/
+    /*width: 120px;*/
+/*}*/
+
+
+
+/*td.num*/
+/*{*/
+    /*text-align: right;*/
+    /*width: 50px;*/
+/*}*/
+
+/*td.cur*/
+/*{*/
+    /*text-align: left;*/
+    /*width: 50px;*/
+    /*font-size:smaller;*/
+/*}*/
+/*td.snum*/
+/*{*/
+    /*text-align: center;*/
+    /*width: 20px;*/
+/*}*/
+
+/*td.direct*/
+/*{*/
+    /*text-align: center;*/
+    /*vertical-align: middle;*/
+    /*width: 10px;*/
+    /*font-weight: 700;*/
+    /*font-size:x-large;*/
+/*}*/
+/*td.smart*/
+/*{*/
+    /*text-align: right;*/
+    /*width: 150px;*/
+    /*max-width: 200px;*/
+/*}*/
+
+
+/*td.txt*/
+/*{*/
+    /*text-align: left;*/
+    /*width: 100px;*/
+/*}*/
+/*td.desc*/
+/*{*/
+    /*text-align: left;*/
+    /*width: 200px;*/
+    /*max-width: 200px;*/
+    /*word-break: break-all;*/
+/*}*/
+/*td.name*/
+/*{*/
+    /*text-align: left;*/
+    /*width: 100px;*/
+/*}*/
+
+/*td.date*/
+/*{*/
+    /*text-align: left;*/
+    /*width: 90px;*/
+    /*font-size: small;*/
+/*}*/
+
+
+
+
+
+
+/*!*SEND SEND SEND SEND SEND SEND SEND SEND SEND SEND *!*/
+
+/*table.form_input*/
+/*{*/
+   /*border-collapse: collapse;*/
+   /*width: 600px;*/
+/*}*/
+/*.form_input td*/
+/*{*/
+    /*width: 20%;*/
+/*}*/
+/*.form_input td:nth-child(2)*/
+/*{*/
+    /*width: 80%;*/
+/*}*/
+
+/*.form_input input, .form_input select*/
+/*{*/
+    /*width: 98%;*/
+    /*text-align: right;*/
+/*}*/
+
+/*.form_input textarea*/
+/*{*/
+    /*width: 98%;*/
+    /*text-align: left;*/
+/*}*/
+/*.form_input .bsend*/
+/*{*/
+    /*width: 33%;*/
+    /*height: 30px;*/
+    /*text-align: center;*/
+    /*float: left;*/
+/*}*/
+/*.short_input input*/
+/*{*/
+    /*width: 120px;*/
+/*}*/
+
+
+
+
+/*td.code*/
+/*{*/
+    /*width: 240px;*/
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*font-size: small;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+/*td.code2*/
+/*{*/
+    /*width: 340px;*/
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*font-size: small;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+/*.hash*/
+/*{*/
+    /*width: 270px;*/
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*font-size: 60%;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+/*.pubkey*/
+/*{*/
+    /*width: 180px;*/
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*font-size: 75%;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+
+/*.accname*/
+/*{*/
+    /*width: 180px;*/
+    /*font-family: Cambria,sans-serif;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+
+
+/*.verify*/
+/*{*/
+
+/*}*/
+
+
+
+/*!*CHECKBOX*!*/
+
+/*.checkbox*/
+/*{*/
+    /*position: absolute;*/
+    /*z-index: -1;*/
+    /*opacity: 0;*/
+    /*margin: 10px 0 0 20px;*/
+/*}*/
+/*.checkbox + label*/
+/*{*/
+    /*position: relative;*/
+    /*padding: 0 20px 0 55px;*/
+    /*cursor: pointer;*/
+/*}*/
+/*.checkbox + label:before*/
+/*{*/
+    /*content: '';*/
+    /*position: absolute;*/
+    /*top: -4px;*/
+    /*left: 0;*/
+    /*width: 50px;*/
+    /*height: 26px;*/
+    /*border-radius: 13px;*/
+    /*background: #CDD1DA;*/
+    /*box-shadow: inset 0 2px 3px rgba(0,0,0,.2);*/
+    /*transition: .2s;*/
+
+/*}*/
+/*.checkbox + label:after*/
+/*{*/
+    /*content: '';*/
+    /*position: absolute;*/
+    /*top: -2px;*/
+    /*left: 2px;*/
+    /*width: 22px;*/
+    /*height: 22px;*/
+    /*border-radius: 10px;*/
+    /*background: #FFF;*/
+    /*box-shadow: 0 2px 5px rgba(0,0,0,.3);*/
+    /*transition: .2s;*/
+/*}*/
+/*.checkbox:checked + label:before*/
+/*{*/
+    /*background: #46b319;*/
+/*}*/
+/*.checkbox_red:checked + label:before*/
+/*{*/
+    /*background: darkred;*/
+/*}*/
+
+/*.checkbox_alert + label:before*/
+/*{*/
+    /*background: #f0b323;*/
+/*}*/
+
+/*.checkbox:checked + label:after*/
+/*{*/
+    /*left: 26px;*/
+/*}*/
+/*.checkbox:focus + label:before*/
+/*{*/
+    /*box-shadow: inset 0 2px 3px rgba(0,0,0,.2), 0 0 0 3px rgba(217, 217, 217, 0.7);*/
+/*}*/
+
+
+
+
+
+
+
+
+/*#idPercentMining*/
+/*{*/
+    /*width: 40px;*/
+    /*text-align: center;*/
+    /*display:inline-block;*/
+/*}*/
+
+
+
+/*#idNodeWhiteList*/
+/*{*/
+    /*width: 780px;*/
+/*}*/
+
+
+/*#idTotalSum*/
+/*{*/
+    /*text-align: left;*/
+/*}*/
+
+/*!*CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG CONFIG*!*/
+/*!*Просмотр ключей*!*/
+/*table.keys*/
+/*{*/
+    /*border-collapse: collapse;*/
+    /*width: 800px;*/
+/*}*/
+/*!*Редактирование приватного ключа*!*/
+/*#grid_edit_key .bt*/
+/*{*/
+    /*width: 80px;*/
+    /*height: 30px;*/
+    /*line-height: 20px;*/
+    /*margin: 10px;*/
+    /*text-align: center;*/
+/*}*/
+/*#idTypeKey,#idShortNameText*/
+/*{*/
+    /*width: 250px;*/
+    /*height: 20px;*/
+    /*text-align: left;*/
+/*}*/
+
+/*!*Редактирование new acc Name*!*/
+/*#grid_edit_newacc .bt, #grid_mining_set .bt, #idTablePassword1 .bt, #idTablePassword2 .bt*/
+/*{*/
+    /*width: 80px;*/
+    /*height: 30px;*/
+    /*line-height: 20px;*/
+    /*margin: 10px;*/
+    /*text-align: center;*/
+/*}*/
+/*#idAutoSetMining*/
+/*{*/
+    /*width: 16px;*/
+    /*height: 16px;*/
+    /*text-align: left;*/
+    /*top: 3px;*/
+    /*position:relative;*/
+/*}*/
+
+/*#grid_accounts_all, #grid_history*/
+/*{*/
+    /*font-size: smaller;*/
+/*}*/
+/*#grid_history .red td*/
+/*{*/
+    /*color: darkred;*/
+/*}*/
+/*#grid_history .blue td*/
+/*{*/
+    /*color: darkblue;*/
+/*}*/
+/*#grid_history .green td*/
+/*{*/
+    /*color: darkgreen;*/
+/*}*/
+
+
+
+/*!*idStatus Log operations*!*/
+/*#idStatus*/
+/*{*/
+    /*z-index:1000;*/
+    /*position:relative;*/
+    /*top:40px;*/
+    /*left:10px;*/
+    /*text-align: left;*/
+    /*width:800px; !* ширина блока *!*/
+    /*color:blue;*/
+/*}*/
+
+/*#idServerLog*/
+/*{*/
+    /*width:100%;*/
+    /*max-width: 800px;*/
+    /*text-align: left;*/
+
+    /*border: 1px solid black;*/
+    /*height: 220px;*/
+    /*padding: 1px;*/
+    /*margin: 0px;*/
+
+
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*font-size: 80%;*/
+    /*align-content: left;*/
+    /*word-break: break-all;*/
+
+/*}*/
+
+/*#idTransaction*/
+/*{*/
+    /*width:100%;*/
+    /*min-width: 795px;*/
+    /*max-width: 795px;*/
+    /*text-align: left;*/
+    /*color:#204410;*/
+/*}*/
+
+/*#idDescription*/
+/*{*/
+    /*width: 95%;*/
+    /*min-width: 560px;*/
+    /*max-width: 560px;*/
+/*}*/
+
+
+/*#idAccount*/
+/*{*/
+    /*width: 100%;*/
+    /*text-align: left;*/
+    /*align-content: left;*/
+/*}*/
+/*#idTo*/
+/*{*/
+    /*width: 99%;*/
+    /*text-align: left;*/
+    /*align-content: left;*/
+/*}*/
+
+/*#idSumSend*/
+/*{*/
+    /*background-color: #f0ffb9;*/
+    /*font-weight: 700;*/
+    /*width: 75%;*/
+/*}*/
+
+/*#view_header*/
+/*{*/
+    /*width: 800px;*/
+    /*font-weight: 600;*/
+    /*color: black;*/
+    /*text-align: center;*/
+/*}*/
+/*.header_tr*/
+/*{*/
+    /*width: 600px;*/
+    /*font-weight: 600;*/
+    /*text-align: center;*/
+    /*color:black;*/
+/*}*/
+
+
+/*#idPaginationHistory, #idPaginationBlock, #idPaginationAccount, #idPaginationAct, #idPaginationHash, #idUtilView, #idPaginationDapps*/
+/*{*/
+    /*width: 800px;*/
+    /*align-content: center;*/
+    /*text-align: center;*/
+/*}*/
+
+
+/*#MAIN*/
+/*{*/
+    /*align-content: left;*/
+/*}*/
+
+/*#idStableScroll*/
+/*{*/
+    /*z-index:0;*/
+    /*position:absolute;*/
+    /*top:800px;*/
+    /*height: 10px;*/
+    /*color: darkred;*/
+    /*width: 97%;*/
+    /*margin: auto;*/
+/*}*/
+
+
+
+
+/*#idBlockOnSend*/
+/*{*/
+    /*z-index:100;*/
+    /*position:absolute;*/
+    /*height:150px;*/
+    /*width:380px;*/
+    /*top:20%;*/
+    /*left:0;*/
+    /*transform: translateX(50vw) translateX(-190px);*/
+
+    /*font-size: larger;*/
+    /*padding: 10px;*/
+    /*background: #2b372d;*/
+    /*color: white;*/
+    /*text-align: left;*/
+    /*border: 1px solid gray;*/
+    /*box-shadow: 0 0 0 2px darkgrey;*/
+    /*border-radius: 8px;*/
+/*}*/
+
+/*.radius*/
+/*{*/
+    /*border-radius: 4px;*/
+    /*max-height: 34px;*/
+    /*height: 34px;*/
+/*}*/
+/*button.radius*/
+/*{*/
+    /*color:white;*/
+    /*background-color: #337ab7;*/
+    /*border-color: #2e6da4;*/
+    /*width: 100px;*/
+    /*margin: 20px;*/
+/*}*/
+
+
+
+/*.bt_open_dapp*/
+/*{*/
+    /*min-width: 160px;*/
+    /*max-width: 160px;*/
+    /*height: 40px;*/
+    /*min-height: 40px;*/
+    /*vertical-align:middle;*/
+    /*margin: 0;*/
+/*}*/
+
+/*.setsmart*/
+/*{*/
+    /*color:saddlebrown;*/
+    /*margin: 0;*/
+/*}*/
+/*#TabHeader th*/
+/*{*/
+
+    /*color: white;*/
+    /*background-color: #22547f;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*height: 34px;*/
+/*}*/
+/*.bttab*/
+/*{*/
+    /*background-color: #2b372d;*/
+    /*vertical-align: middle;*/
+    /*cursor: pointer;*/
+    /*color: white;*/
+    /*width: 100%;*/
+    /*margin: 0;*/
+    /*padding-top: 7px;*/
+    /*height: 100%;*/
+    /*border: 1px solid white;*/
+/*}*/
+/*.bttab:hover*/
+/*{*/
+    /*color: #ff9749;*/
+/*}*/
+/*.current*/
+/*{*/
+    /*background-color: #4b5e4d;*/
+    /*color:#ff9749;*/
+/*}*/
+/*#TabHeader th*/
+/*{*/
+    /*width: 200px;*/
+/*}*/
+
+/*body*/
+/*{*/
+    /*background-color: #fffefe;*/
+    /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    /*font-size: 13px;*/
+    /*line-height: 1.42857143;*/
+/*}*/
+
+/*.DIAGRAM*/
+/*{*/
+    /*border-radius: 6px;*/
+    /*width: 800px;*/
+/*}*/
+/*table*/
+/*{*/
+    /*border-collapse: collapse;*/
+    /*width:100%;*/
+    /*max-width: 800px;*/
+    /*margin: 10px;*/
+/*}*/
+/*.grid th, .grid td*/
+/*{*/
+    /*border: 1px solid #777678;*/
+    /*padding: 4px;*/
+/*}*/
+/*.grid td*/
+/*{*/
+    /*width: 60px;*/
+    /*vertical-align:top;*/
+/*}*/
+
+/*button*/
+/*{*/
+    /*font-family: monospace;*/
+/*}*/
+
+/*button:hover*/
+/*{*/
+    /*filter: brightness(120%);*/
+    /*cursor: pointer;*/
+/*}*/
+/*.openblock*/
+/*{*/
+    /*padding: 2px;*/
+    /*filter: brightness(120%);*/
+/*}*/
+/*.btview*/
+/*{*/
+    /*background-color: #afb0b7;*/
+    /*border: 1px solid #000;*/
+    /*height: 120px;*/
+    /*width: 150px;*/
+    /*padding-top: 0px;*/
+    /*cursor: pointer;*/
+    /*font-size: large;*/
+/*}*/
+/*.btview:hover*/
+/*{*/
+    /*color: #cb7043;*/
+    /*filter:none;*/
+/*}*/
+
+/*.btpress, .btpress:hover*/
+/*{*/
+    /*border: 2px solid #000;*/
+    /*color: #9c5335;*/
+    /*filter:none;*/
+/*}*/
+
+
+/*.btnav*/
+/*{*/
+    /*font-family: monospace;*/
+    /*height: 32px;*/
+/*}*/
+
+/*.pag_num*/
+/*{*/
+    /*border-radius: 4px;*/
+    /*height: 26px;*/
+    /*margin: 2px;*/
+/*}*/
+
+/*td*/
+/*{*/
+    /*font-size: small;*/
+/*}*/
+/*td.num*/
+/*{*/
+    /*text-align: right;*/
+    /*width: 50px;*/
+/*}*/
+/*td.sum*/
+/*{*/
+    /*text-align: right;*/
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*min-width: 150px;*/
+    /*max-width: 150px;*/
+/*}*/
+/*td.cur*/
+/*{*/
+    /*min-width: 80px;*/
+    /*max-width: 80px;*/
+/*}*/
+
+/*td.date*/
+/*{*/
+    /*text-align: left;*/
+    /*width: 90px;*/
+/*}*/
+/*td.hash*/
+/*{*/
+    /*max-width: 113px;*/
+    /*min-width: 113px;*/
+    /*font-family: "courier new", "times new roman", monospace;*/
+    /*font-size: 60%;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+/*td.pubkey*/
+/*{*/
+    /*min-width: 195px;*/
+    /*max-width: 195px;*/
+/*}*/
+
+/*.accname*/
+/*{*/
+    /*width: 180px;*/
+    /*min-width: 140px;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+/*.dappname*/
+/*{*/
+    /*width: 140px;*/
+    /*min-width: 140px;*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+    /*word-break: break-all;*/
+/*}*/
+/*td.dappdesc*/
+/*{*/
+    /*width: 180px;*/
+    /*min-width: 180px;*/
+    /*word-break: normal;*/
+/*}*/
+
+
+/*#idCurrentBlockNum*/
+/*{*/
+    /*margin: 10px;*/
+    /*height: 20px;*/
+/*}*/
+
+/*.delete*/
+/*{*/
+    /*position: absolute;*/
+    /*display: none;*/
+/*}*/
+
+/*#idCategory*/
+/*{*/
+    /*margin: 5px;*/
+/*}*/
+
+#idPrivKeyButton, #idPrivKeyEdit, #idPubKey {
+    /*width: 100%;*/
+    /*border: 1px solid #1a2ec1;*/
+    /*background-color: white;*/
+    /*font-family: monospace;*/
+    padding: 6px;
+}
+#idPrivKeyEdit {
+    color: darkgreen;
+    font-weight: 600;
+}
+#idKeys,#idAccountEdit{
+    vertical-align: middle;
+}
+#idKeys .label,
+#TabSend .label,
+#idAccountEdit .label{
+    display: inline-block;
+    color: #e7e7e7;
+    font-size: 14px;
+    min-width: 90px;
+    vertical-align: top;
+}
+#idKeys .inputBtn,
+#idAccountEdit .inputBtn{
+    display: inline-block;
+    width: 400px;
+    background: rgba(255,255,255,0.3);
+    border: 0;
+    color: #ffffff;
+    margin:0 20px 10px 0;
+}
+#TabSend .inputStl,
+#idKeys .inputStl,
+#idAccountCur.selectstl,
+#TabSend .selectstl,
+#idAccountEdit .inputStl{
+    display: inline-block;
+    width: 400px;
+    background: rgba(255,255,255,0.3);
+    border: 0;
+    color: #ffffff;
+    margin:0 20px 10px 0;
+
+}
+textarea{
+    display: inline-block;
+    width: 400px;
+    background: rgba(255,255,255,0.3);
+    border: 0;
+    color: #ffffff;
+    margin:0 20px 10px 0;
+    padding: 6px;
+}
+#edit_transaction textarea{
+    width: 100%;
+    height: 400px;
+}
+#TabSend .inputStl,
+#idAccountEdit .inputStl{
+    padding: 6px;
+}
+#TabSend .selectstl,
+#idAccountCur.selectstl{
+    border-radius: 0!important;
+    display: inline-block;
+    margin-left: -3px;
+    padding:6px 2rem;
+}
+select{
+    padding: 0;
+    margin: 0;
+}
+/*#idKeys td:first-child*/
+/*{*/
+    /*width: 80px;*/
+/*}*/
+/*#idKeys td:nth-child(2)*/
+/*{*/
+    /*width: 520px;*/
+/*}*/
+/*#idKeys td:nth-child(3)*/
+/*{*/
+    /*align-content: left;*/
+    /*text-align: left;*/
+/*}*/
+
+
+/*.btkey*/
+/*{*/
+    /*width: 60px;*/
+    /*padding: 5px;*/
+/*}*/
+/*.bigs*/
+/*{*/
+    /*padding: 5px;*/
+/*}*/
+
+/*#idStatus*/
+/*{*/
+    /*top:0px;*/
+    /*left:10px;*/
+    /*text-align: left;*/
+    /*width:700px;*/
+    /*height: 20px;*/
+    /*color:blue;*/
+/*}*/
+/*#idNetwork*/
+/*{*/
+    /*top:0px;*/
+    /*right:10px;*/
+    /*text-align: center;*/
+    /*width:100px;*/
+    /*height: 20px;*/
+    /*color: #286798;*/
+    /*padding-right: 5px;*/
+/*}*/
+@media screen and (max-width:752px) {
+    a.key{
+        margin-left: 0!important;
+    }
+}
+
+
+@media screen and (max-width:460px) {
+    #idKeys .inputBtn,#idKeys .inputStl,
+    #TabSend .inputStl,
+    #idAccountEdit .inputBtn,#idAccountEdit .inputStl{
+            width: 90%;
+        }
+    .ss-custom-select::after {
+        right: 1rem;
+
+    }
+    #idAccountCur.selectstl{
+        width: 100%;
+    }
+    #TabAccounts.row {
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+    .w100p{
+        overflow-x:auto;
+        /*width: 90px;*/
+        padding-bottom: 20px;
+
+    }
+
+}
+
+.reconnet{
+    border-top: 1px solid #fff;
+    padding-top: 10px;
+    margin-top: 10px;
+}

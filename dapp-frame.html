@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-Frame-Options" value="sameorigin">
+    <title>DAPP Loading...</title>
+    <link rel="shortcut icon" href="./tera.ico" type="image/vnd.microsoft.icon">
+
+    <script type="text/javascript" src="./JS/crypto-client.js"></script>
+    <script type="text/javascript" src="./JS/coinlib.js"></script>
+    <script type="text/javascript" src="./JS/client.js"></script>
+    <script type="text/javascript" src="./JS/terahashlib.js"></script>
+
+
+    <script>
+        var DapNumber="#template-number#";
+        var glSmart=parseInt(DapNumber);
+        var CONFIG_DATA={};
+        var NumDappGet=0;
+        var NumDappInfo=0;
+
+
+        //DAPP TRANSFER
+        function SendMessage(Data)
+        {
+            var win = window.frames.dapp;
+            if(!win)
+            {
+                console.log("Error window.frames.dapp");
+
+                //try latter
+                setTimeout(function ()
+                {
+                    win.postMessage(Data, "*");
+                },200);
+                return;
+            }
+            //console.log("To dapp: "+JSON.stringify(Data))
+            win.postMessage(Data, "*");
+        }
+
+        function listener(event)
+        {
+            var Data=event.data;
+            if(!Data || typeof Data!=="object")
+                return;
+
+
+            switch (Data.cmd)
+            {
+                case "pay":
+                {
+                    AddToInvoiceList(Data);
+                    break;
+                }
+                case "setstorage":
+                {
+                    localStorage.setItem("DAPP-"+DapNumber+"-"+Data.Key,JSON.stringify(Data.Value));
+                    break;
+                }
+                case "getstorage":
+                {
+                    Data.Value=localStorage.getItem("DAPP-"+DapNumber+"-"+Data.Key);
+                    if(Data.Value)
+                        Data.Value=JSON.parse(Data.Value);
+                    SendMessage(Data);
+                    break;
+                }
+                case "setcommon":
+                {
+                    localStorage.setItem("DAPP-"+Data.Key,JSON.stringify(Data.Value));
+                    break;
+                }
+                case "getcommon":
+                {
+                    Data.Value=localStorage.getItem("DAPP-"+Data.Key);
+                    if(Data.Value)
+                        Data.Value=JSON.parse(Data.Value);
+                    SendMessage(Data);
+                    break;
+                }
+
+                case "DappCall":
+                {
+                    if(!Data.Account)
+                        Data.Account=BASE_ACCOUNT.Num;
+
+                    GetData("DappStaticCall",{Account:Data.Account,MethodName:Data.MethodName,Params:Data.Params}, function (SetData)
+                    {
+                        if(SetData)
+                        {
+                            Data.Err=!SetData.result;
+                            Data.RetValue=SetData.RetValue;
+                        }
+                        else
+                        {
+                            Data.Err=1;
+                        }
+                        SendMessage(Data);
+                    });
+
+                    break;
+                }
+                case "DappSendCall":
+                {
+                    if(!Data.Account)
+                        Data.Account=BASE_ACCOUNT.Num;
+                    if(!Data.FromNum)
+                        Data.FromNum=0;
+
+                    SendCallMethod(Data.Account,Data.MethodName,Data.Params,Data.FromNum,glSmart);
+
+                    break;
+                }
+                case "DappInfo":
+                {
+
+                    //called every 1 sec from dapp-inner.js
+
+                    var AllData=0;
+                    if(!NumDappGet || NumDappGet%60===0)
+                        AllData=1;
+                    NumDappGet++;
+
+                    var Key=localStorage["idPubKey"];
+                    GetData("DappInfo",{Smart:glSmart,Key:Key,NumDappInfo:NumDappInfo,AllData:AllData}, function (SetData)
+                    {
+                        if(SetData)
+                        {
+                            Data.Err=!SetData.result;
+                            Data.usebufer=SetData.usebufer;
+                            if(SetData.result)
+                            {
+                                CONFIG_DATA=SetData;
+                                SMART=SetData.Smart;
+                                BASE_ACCOUNT=SetData.Account;
+                                SetBlockChainConstant(SetData);
+                                NumDappInfo=SetData.NumDappInfo;
+                                SetArrLog(SetData.ArrLog);
+
+
+                                for(var key in SetData)
+                                    Data[key]=SetData[key];
+                                Data.OPEN_PATH=OPEN_PATH;
+
+                                if(!Data.PubKey)
+                                {
+                                    //support web/light wallet mode:
+                                    Data.PubKey=localStorage["idPubKey"];
+                                    Data.WalletIsOpen=IsPrivateMode(localStorage["idPrivKey"]);
+                                    Data.WalletCanSign=Data.WalletIsOpen;
+                                }
+                            }
+
+                            SendMessage(Data);
+                        }
+                    });
+                    break;
+                }
+                case "DappWalletList":
+                    var Key=localStorage["idPubKey"];
+                    Data.Params={Smart:glSmart,Key:Key};
+                case "DappSmartHTMLFile":
+                case "DappBlockFile":
+                case "DappAccountList":
+                case "DappSmartList":
+                case "DappBlockList":
+                case "DappTransactionList":
+                {
+                    GetData(Data.cmd,Data.Params, function (SetData)
+                    {
+                        if(SetData)
+                        {
+                            Data.Err=!SetData.result;
+                            Data.arr=SetData.arr;
+                            Data.Body=SetData.Body;
+                            SendMessage(Data);
+                        }
+                    });
+                    break;
+                }
+
+                case "SetStatus":
+                {
+                    SetStatus(escapeHtml(Data.Message));
+                    break;
+                }
+                case "SetError":
+                {
+                    SetError(escapeHtml(Data.Message));
+                    break;
+                }
+                case "CheckInstall":
+                {
+                    CheckInstall();
+                    break;
+                }
+                case "SetLocationHash":
+                {
+                    window.location.hash="#"+Data.Message;
+                    break;
+                }
+                case "OpenLink":
+                {
+                    window.open(Data.Message);
+                    break;
+                }
+                case "ComputeSecret":
+                {
+                    ComputeSecret(Data.PubKey,function (Result)
+                    {
+                        Data.Result=Result;
+                        SendMessage(Data);
+                    });
+                    break;
+                }
+
+
+            }
+
+            //SetStatus( "Получено: " + JSON.stringify(Data.Message));
+        }
+
+        if (window.addEventListener)
+        {
+            window.addEventListener("message", listener);
+        } else
+        {
+            // IE8
+            window.attachEvent("onmessage", listener);
+        }
+
+        var SMART={},BASE_ACCOUNT={},OPEN_PATH="";
+        window.onload=function()
+        {
+            if(window.location.hash)
+                OPEN_PATH=window.location.hash.substr(1);
+            if(window.location.protocol==="file:")
+            {
+                DapNumber=window.location.search.substr(6);
+                if(localStorage["MainServer"])
+                {
+                    MainServer=JSON.parse(localStorage["MainServer"]);
+                }
+            }
+            glSmart=parseInt(DapNumber);
+
+
+            var Key=localStorage["idPubKey"];
+            GetData("DappInfo",{Smart:glSmart, Key:Key, AllData:1}, function (SetData)
+            {
+                if(!SetData || !SetData.result)
+                    return;
+
+                CONFIG_DATA=SetData;
+                SMART=SetData.Smart;
+                BASE_ACCOUNT=SetData.Account;
+                SetBlockChainConstant(SetData);
+                document.title=SMART.Name;
+
+
+                if(!glDebugPath && BASE_ACCOUNT.SmartState.HTMLBlock)
+                {
+                    GetData("DappBlockFile",{BlockNum:BASE_ACCOUNT.SmartState.HTMLBlock,TrNum:BASE_ACCOUNT.SmartState.HTMLTr}, function (SetData)
+                    {
+                        if(SetData && SetData.result)
+                        {
+                            CreateFrame(SetData);
+                        }
+                    });
+                }
+                else
+                {
+                    GetData("DappSmartHTMLFile",{Smart:glSmart,DebugPath:glDebugPath}, function (SetData)
+                    {
+                        if(SetData && SetData.result)
+                        {
+                            CreateFrame(SetData);
+                        }
+                    });
+                }
+
+
+            });
+
+            if(!window.sha3)
+                LoadLib("./JS/sha3.js");
+            LoadSignLib();
+
+        }
+
+        function CreateFrame(SetData)
+        {
+            var SriptLW="";
+            if(MainServer)
+            {
+                var StrPath=GetProtocolServerPath(MainServer);
+
+                //поддрежка старого кода dapp (после обновления dapp этот код возможно будет удален)
+                SetData.Body=SetData.Body.replace(/\/[0-9a-z_-]+.css\">/g,StrPath+"/CSS$&");
+                SetData.Body=SetData.Body.replace(/\/[0-9a-z_-]+.js\">/g,StrPath+"/JS$&");
+
+
+                //TODO: переделать на нормальный парсинг без регулярки
+                //поддержка перенаправления в блокчейн
+                SetData.Body=SetData.Body.replace(/\/file\/[0-9]+\/[0-9]+\">/g,StrPath+"$&");
+                SriptLW="<script>window.PROTOCOL_SERVER_PATH='"+StrPath+"';<\/script>";
+
+            }
+
+
+            var iframe = document.createElement('iframe');
+            iframe.name = 'dapp';
+            iframe.sandbox="allow-scripts";
+            SetData.Body='\
+                    <meta charset="UTF-8">\
+                    <meta http-equiv="X-Frame-Options" value="sameorigin">\
+                    <script type="text/javascript" src="./JS/crypto-client.js"><\/script>\
+                    <script type="text/javascript" src="./JS/coinlib.js"><\/script>\
+                    <script type="text/javascript" src="./JS/client.js"><\/script>\
+                    <script type="text/javascript" src="./JS/dapp-inner.js"><\/script>\
+                    <script type="text/javascript" src="./JS/terahashlib.js"><\/script>\
+                    '+SriptLW+SetData.Body;
+
+            iframe.srcdoc=SetData.Body;
+            document.getElementsByTagName('body')[0].appendChild(iframe);
+        }
+
+
+
+
+        var WasCheckInstall=0;
+        function CheckInstall()
+        {
+            if(WasCheckInstall)
+                return;
+            setInterval(function ()
+            {
+                if(CONFIG_DATA && CONFIG_DATA.ArrWallet && CONFIG_DATA.ArrWallet.length===0)
+                {
+                    WasCheckInstall=1;
+                    SetStatus('<DIV style="background-color: peachpuff;">For install this application goto ACCOUNTS(CONFIG) tab, select your account, press "Set" and enter smart number: <B>'+SMART.Num+'</B><DIV>');
+                }
+
+            },2000);
+        }
+
+        //LIB
+        function SetArrLog(arr)
+        {
+            var Str="";
+            if(arr)
+            for(var i=0;i<arr.length;i++)
+            {
+                var Item=arr[i];
+                if(!Item.final)
+                    continue;
+                if(Item.text.indexOf("Add to blockchain")>=0)
+                    continue;
+
+
+                var TR=MapSendTransaction[Item.key];
+                if(TR && !TR.WasSend && Item.final)
+                {
+                    var Data={};
+                    Data.cmd="OnEvent";
+                    Data.Description="Error: "+Item.text;
+                    Data.Error=1;
+                    //console.log(JSON.stringify(Item));
+                    SendMessage(Data);
+                    TR.WasSend=1;
+                }
+            }
+         }
+        function IsPrivateMode(PrivKeyStr)
+        {
+            if(PrivKeyStr  && PrivKeyStr.length===64)
+                return 1;
+            else
+                return 0;
+        }
+
+
+        function SetStatus(Str)
+        {
+            var id = $("idStatus");
+            // id.innerHTML=Str;
+          id.append(Str)
+        }
+        function SetError(Str,bNoSound)
+        {
+            SetStatus("<DIV style='color:red'><B>"+Str+"</B></DIV>");
+        }
+
+        function InstallApp()
+        {
+
+        }
+
+    </script>
+    <style>
+        iframe
+        {
+            position:fixed;
+            left:0;
+            top: 20px;
+            width: 100%;
+            height: 97vh;
+            border: 0;
+        }
+        #idStatus
+        {
+            text-align: center;
+            position:fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height:20px;
+            padding: 0;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+<DIV id="idStatus"></DIV>
+</body>
+</html>
+<script>
+    var glDebugPath="";
+//        glDebugPath="./dapp-smart/forum.html";
+//        glDebugPath="./dapp-smart/DEX.html";
+    //glDebugPath="./dapp-smart/test-load.html";
+    //    glDebugPath="./dapp-smart/gambling-1.html";
+    //   glDebugPath="./dapp-smart/BTC-coin.html";
+    //  glDebugPath="./dapp-smart/freeze.html";
+    //  glDebugPath="./dapp-smart/promise.html";
+
+    //glDebugPath="./dapp-smart/OnlineStore.html";
+    //{"HTMLBlock":17035437,"HTMLTr":0}
+
+
+
+</script>
+

@@ -1,0 +1,110 @@
+.status{
+    color:rgba(255, 255, 255, 0.5);
+    height: 218px;
+    overflow-y: auto;
+    word-wrap:break-word;
+}
+.status2{
+    color:rgba(255, 255, 255, 0.5);
+    height: 27px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    word-wrap:break-word;
+}
+.status span{
+    padding-right: 20px;
+}
+.search{
+    margin-top: 20px;
+}
+.discord{
+    display: inline-block;
+    background:url("../images/discord.png") no-repeat center 5px;
+    background-size: 100%;
+    width: 28px;
+    height: 28px;
+}
+a:hover .discord{
+    display: inline-block;
+    background: url("../images/discord_hover.png") no-repeat center 5px;
+    background-size: 100%;
+    width: 28px;
+    height: 28px;
+}
+
+a.animated-button:link, a.animated-button:visited {
+    position: relative;
+    display: block;
+    color: #fff;
+    font-size:14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    letter-spacing: .08em;
+    border-radius: 0;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+a.animated-button:link:after, a.animated-button:visited:after {
+    content: "";
+    position: absolute;
+    height: 0%;
+    left: 50%;
+    top: 50%;
+    width: 150%;
+    z-index: -1;
+    -webkit-transition: all 0.75s ease 0s;
+    -moz-transition: all 0.75s ease 0s;
+    -o-transition: all 0.75s ease 0s;
+    transition: all 0.75s ease 0s;
+}
+a.animated-button:link:hover, a.animated-button:visited:hover {
+    color: #000;
+    text-shadow: none;
+}
+a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+    height: 450%;
+}
+
+a.animated-button.victoria-two {
+    border:1px solid #94FF00;
+    width: 250px;
+    margin: 0 auto 30px ;
+    outline: none;
+    padding: 14px 15px;
+    display: inline-block;
+}
+a.animated-button.victoria-two:after {
+    background: rgba(148,255,0,1);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+
+a.animated-button.accounts {
+    border:1px solid #94FF00;
+    outline: none;
+    display: inline-block!important;
+    padding: 4px 20px;
+    vertical-align:top;
+    margin-bottom: 10px;
+}
+a.animated-button.accounts:after {
+    background: rgba(148,255,0,1);
+    -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+    transform: translateX(-50%) translateY(-50%) rotate(25deg);
+}
+a.current{
+    color: #94ff00!important;
+}
+a.key{
+    margin:0 20px 0 81px;
+}

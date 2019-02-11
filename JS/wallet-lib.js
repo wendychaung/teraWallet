@@ -46,7 +46,7 @@ function CheckNameAccTo()
     MaxBlockNum = GetCurrentBlockNumByTime();
     var e = ParseNum($("idTo").value);
     (!MapAccounts[e] || MapAccounts[e].MustUpdate && MapAccounts[e].MustUpdate >= MaxBlockNum) && GetData("GetAccountList", {StartNum:e},
-    
+
 function (e)
     {
         if(e && 1 === e.result && e.arr.length)
@@ -121,7 +121,7 @@ function CreateTransaction(t,e,n)
                 Description:u, Body:v, Sign:CurrentTR.Sign};
             Object.defineProperties(f, {bFindAcc:{configurable:!0, writable:!0, enumerable:!1, value:i}}), Object.defineProperties(f, {Run:{configurable:!0,
                     writable:!0, enumerable:!1, value:n}}), JSON.stringify(f) !== JSON.stringify(CurrentTR) ? (CurrentTR = f, GetSignTransaction(f,
-            
+
 function (e)
             {
                 CurTransactionToForm(!0), t && t(e);
@@ -152,7 +152,7 @@ function CheckSending(e)
         i && i.NextSendTime && i.NextSendTime > MaxBlockNum && (e && SetStatus("Transaction was sending. Wait... (" + i.LastTransactionText + ")"),
         t = !1, n = "Wait...");
     }
-    return $("idSendButton").disabled = !t, $("idSendButton").value = n, $("idSignJSON").disabled = !t, $("idSignJSON").value = a,
+    return $("idSendButton").disabled = !t, $("idSendButton").innerText = n, $("idSignJSON").disabled = !t, $("idSignJSON").value = a,
     t;
 };
 

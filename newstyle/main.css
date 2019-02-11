@@ -64,7 +64,7 @@ body {
 	font-family: "roboto-regular", sans-serif;
 	font-size: 1.6rem;
 	line-height: 3rem;
-	color: #6e6e6e;
+	color: #aaa;
 }
 
 
@@ -457,7 +457,7 @@ textarea{
 	display: none;
 }
 textarea {
-	min-height: 25rem;
+	min-height:15rem;
 }
 input[type="email"]:focus,
 input[type="number"]:focus,

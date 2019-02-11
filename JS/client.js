@@ -500,12 +500,12 @@ function ClearTable(e)
 
 function RetOpenBlock(e,t)
 {
-    return e && t ? '<button onclick="ViewTransaction(' + e + ')" class="openblock">' + e + "</button>" : "<B>" + e + "</B>";
+    return e && t ? '<button onclick="ViewTransaction(' + e + ')" class="openblock">' + e + "</button>" : "<strong>" + e + "</strong>";
 };
 
 function RetBool(e)
 {
-    return e ? "✔" : "";
+    return e ? "<img src='images/yes.png' />" : "";
 };
 
 function RetNumDapp(e)

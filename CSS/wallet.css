@@ -5,6 +5,7 @@
 }
 input,button{
     outline: none;
+    background:transparent;
 }
 table{
     border-collapse: collapse;
@@ -25,7 +26,9 @@ table th{
     border-bottom: 2px solid #2B2B2B;
     vertical-align: middle;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 20px;
+    white-space:nowrap;
+
 }
 table td{
     text-align: left;
@@ -64,10 +67,11 @@ table tr:nth-child(even){background:#333;}
     /*font-weight: 700;*/
 /*}*/
 
-/*.smallbold*/
-/*{*/
-    /*font-weight: 600;*/
-/*}*/
+.smallbold
+{
+    font-weight: 600;
+
+}
 
 
 
@@ -139,7 +143,10 @@ table tr:nth-child(even){background:#333;}
 /*}*/
 
 
-
+#idNameTo{
+    color:#94FF00;
+    padding-bottom: 10px;
+}
 
 
 
@@ -502,40 +509,21 @@ table tr:nth-child(even){background:#333;}
 
 
 
-/*#idBlockOnSend*/
-/*{*/
-    /*z-index:100;*/
-    /*position:absolute;*/
-    /*height:150px;*/
-    /*width:380px;*/
-    /*top:20%;*/
-    /*left:0;*/
-    /*transform: translateX(50vw) translateX(-190px);*/
-
-    /*font-size: larger;*/
-    /*padding: 10px;*/
-    /*background: #2b372d;*/
-    /*color: white;*/
-    /*text-align: left;*/
-    /*border: 1px solid gray;*/
-    /*box-shadow: 0 0 0 2px darkgrey;*/
-    /*border-radius: 8px;*/
-/*}*/
-
-/*.radius*/
-/*{*/
-    /*border-radius: 4px;*/
-    /*max-height: 34px;*/
-    /*height: 34px;*/
-/*}*/
-/*button.radius*/
-/*{*/
-    /*color:white;*/
-    /*background-color: #337ab7;*/
-    /*border-color: #2e6da4;*/
-    /*width: 100px;*/
-    /*margin: 20px;*/
-/*}*/
+#idBlockOnSend {
+    z-index:999999;
+    position:absolute;
+    height:150px;
+    width:340px;
+    top:20%;
+    left:0;
+    transform: translateX(50vw) translateX(-170px);
+    font-size: larger;
+    padding: 10px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    text-align: left;
+    box-shadow: 0 1px 6px 4px rgba(255,255,255,0.3);
+}
 
 
 
@@ -801,6 +789,16 @@ table tr:nth-child(even){background:#333;}
     margin:0 20px 10px 0;
 
 }
+#TabDapps .inputStl{
+    display: inline-block;
+    width: 80px;
+    background: rgba(255,255,255,0.3);
+    border: 0;
+    color: #ffffff;
+    margin:0 0 10px 0;
+    padding: 6px;
+
+}
 textarea{
     display: inline-block;
     width: 400px;
@@ -812,7 +810,7 @@ textarea{
 }
 #edit_transaction textarea{
     width: 100%;
-    height: 400px;
+    height: 300px;
 }
 #TabSend .inputStl,
 #idAccountEdit .inputStl{
@@ -893,6 +891,7 @@ select{
     #idAccountCur.selectstl{
         width: 100%;
     }
+    #TabDapps.row,
     #TabAccounts.row {
         padding-left: 10px;
         padding-right: 10px;
@@ -911,4 +910,19 @@ select{
     border-top: 1px solid #fff;
     padding-top: 10px;
     margin-top: 10px;
+}
+.openblock{
+   border: 0;
+    text-decoration: underline;
+}
+.openblock:hover{
+    color: #94ff00;
+}
+.bt_open_dapp{
+    border: 0;
+}
+.bt_open_dapp:hover{
+    background: #94ff00;
+    color: #000000;
+
 }

@@ -73,7 +73,7 @@
 <header id="main-header" class="main-header">
     <div class="row">
         <div class="logo" id="logo">
-            <a href="#">TERA</a>
+            <a href="javascript:void(0)" onclick="SelectTab('Tabfirst',1)">TERA</a>
         </div>
     </div>
 
@@ -102,7 +102,7 @@
                     <div id="idStatus" class="status">
                     </div>
                     <div class="search">
-                        <a id="idNetwork" onclick="ChangeNetwork()" class="animated-button victoria-two" href="javascript:void(0)"></a>
+                        <button id="idNetwork" onclick="ChangeNetwork()" class="animated-button victoria-two">TERA-TEST</button>
                     </div>
                 </div>
                 <footer>
@@ -124,28 +124,28 @@
                     <li id="WalRow1">
                         <label class="label">Wallet:</label>
                         <button id="idPrivKeyButton" onclick="OpenWallet()" class="inputBtn">Wallet opened: </button>
-                        <a href="javascript:void(0)" onclick="SetVisibleItemsKeys(1)" class="animated-button accounts">Edit...</a>
+                        <button onclick="SetVisibleItemsKeys(1)" class="animated-button accounts">Edit...</button>
                     </li>
                     <li id="WalRow2" style="display: none">
                         <label class="label">Private key:</label>
                         <input type="search" id="idPrivKeyEdit" class="inputStl" oninput="SetPubKey(1);">
-                        <a href="javascript:void(0)" onclick="OnPrivKeyOK()" class="animated-button accounts">OK</a>
-                        <a href="javascript:void(0)" onclick="SetVisibleItemsKeys(0)" class="animated-button accounts">Cancel</a>
+                        <button onclick="OnPrivKeyOK()" class="animated-button accounts">OK</button>
+                        <button onclick="SetVisibleItemsKeys(0)" class="animated-button accounts">Cancel</button>
                     </li>
                     <li id="WalRow3" style="display: none">
                         <label class="label">Pub key:</label>
                         <input type="search" id="idPubKey" class="inputStl" readonly>
                     </li>
                     <li id="WalRow4" style="display: none">
-                        <a href="javascript:void(0)" class="animated-button accounts key" onclick="OnPrivKeyNew()">Generate key</a>
-                        <input type="checkbox" id="idShowPubKey" oninput="SetVisibleItemsKeys(1)"> <label
-                            for="idShowPubKey">Show pub key</label>
+                        <button class="animated-button accounts key" onclick="OnPrivKeyNew()">Generate key</button>
+                        <input type="checkbox" id="idShowPubKey" oninput="SetVisibleItemsKeys(1)"> <label class="label" for="idShowPubKey">Show pub key</label>
                             <!--Set password:<input class="bigs" type="search" id="idProtKey">-->
                     </li>
                 </ul>
                     <div id="idStatus2" class="status2" style="display:none;"></div>
-                    <div> <a href="javascript:void(0)" class="animated-button accounts" onclick="ConnectWebWallet(1)"> Reconnect</a>
-                    <a href="javascript:void(0)" class="animated-button accounts" onclick="ViewNewAccount()"> New account...</a>
+                    <div>
+                        <button class="animated-button accounts" onclick="ConnectWebWallet(1)"> Reconnect</button>
+                    <button class="animated-button accounts" onclick="ViewNewAccount()"> New account...</button>
                     <ul id="idAccountEdit" class="reconnet" style="display: none;">
                         <li>
                             <label class="label">Public name:</label><input class="inputStl" type="text" id="idAccountName">
@@ -159,8 +159,8 @@
                            </div>
                        </li>
                         <li>
-                            <a href="javascript:void(0)" class="animated-button accounts" onclick="OnSetAccount(1)">OK</a>
-                            <a href="javascript:void(0)" class="animated-button accounts" onclick="OnSetAccount(0)">Cancel</a>
+                            <button class="animated-button accounts" onclick="OnSetAccount(1)">OK</button>
+                            <button class="animated-button accounts" onclick="OnSetAccount(0)">Cancel</button>
                         </li>
                     </ul>
                 </div>
@@ -181,7 +181,7 @@
 
             </div>
             <div class="row" id="TabSend" style="display: none;">
-                <div id="idSendList"> </div>
+                <div id="idSendList"></div>
                 <ul>
                     <li>
                         <label class="label">From account:</label>
@@ -198,69 +198,29 @@
                     <li>
                         <label class="label">Amount:</label>
                         <input type="number" class="inputStl" id="idSumSend" value="" step=0 min=0 max=1000000000 oninput="OnEditTransactionFields()">&nbsp;
-                        <a href="javascript:void(0)" style="font-family: monospace;"   class="animated-button accounts" onclick="SetAllSum()"><-</a>
+                        <a href="javascript:void(0)" style="font-family: monospace;" class="animated-button accounts" onclick="SetAllSum()"><-</a>
                         <strong id="idCoinName"></strong>
                     </li>
                     <li>
                         <label class="label">Description<br>(optional):</label>
-                        <textarea id="idDescription" rows="4" oninput="CheckLengthAccDesription('idDescription',200);OnEditTransactionFields()"></textarea>
+                        <textarea id="idDescription" oninput="CheckLengthAccDesription('idDescription',200);OnEditTransactionFields()"></textarea>
                         <div id="idAttach"> </div>
                     </li>
+                    <li><div id="idStatus3" class="status2" style="display:none;"></div></li>
                     <li>
-                        <a href="javascript:void(0)" onclick="ClearTransaction()" class="animated-button accounts">Clear</a>
-                        <a href="javascript:void(0)" onclick="EditJSONTransaction();SetImg(this,'edit_transaction');" class="animated-button accounts" id="idDown">Edit JSON</a>
-                        <a href="javascript:void(0)" onclick="SendMoneyBefore()" class="animated-button accounts" id="idSendButton" >Send</a>
+                        <button onclick="ClearTransaction()" class="animated-button accounts">Clear</button>
+                        <button onclick="EditJSONTransaction();SetImg(this,'edit_transaction');" class="animated-button accounts" id="idDown">Edit JSON</button>
+                        <button onclick="SendMoneyBefore()"  id="idSendButton" class="animated-button accounts">Send</button>
+                        <button class="animated-button accounts" onclick="ConnectWebWallet(2)"> Reconnect</button>
                     </li>
                 </ul>
-                <!--<table class="form_input">-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td style="min-width: 115px">From account</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<select size="1" id="idAccount" oninput="OnEditTransactionFields(); CheckSending();">&ndash;&gt;-->
-                            <!--&lt;!&ndash;</select>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>&nbsp;</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td><DIV id="idNameTo" class="smallbold"></DIV></td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>Pay to</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<input style="float: left" type="string" id="idTo" value="" oninput="OnEditIdTo()" placeholder="Payee (required)" >&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>Amount</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<input type="number" id="idSumSend" value="" step=0 min=0 max=1000000000 oninput="OnEditTransactionFields()">&nbsp;&ndash;&gt;-->
-                            <!--&lt;!&ndash;<button style="font-family: monospace;" onclick="SetAllSum()"><-</button>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<B id="idCoinName"></B>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>Description (optional)</td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<textarea id="idDescription" rows="4" oninput="CheckLengthAccDesription('idDescription',200);OnEditTransactionFields()"></textarea>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<div id="idAttach"> </div>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td></td>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<td>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<input type="button" onclick="ClearTransaction()" class="bsend bt" value="Clear">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<input type="button" onclick="EditJSONTransaction();SetImg(this,'edit_transaction');" class="bsend bt" value="Edit JSON" id="idDown">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<input type="button" onclick="SendMoneyBefore()" class="bsend bt" id="idSendButton" value="Send" >&ndash;&gt;-->
-                        <!--&lt;!&ndash;</td>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-                <!--</table>-->
                 <div id="edit_transaction" style="display: none">
                     <div>
                         <textarea id="idTransaction" rows="20" onkeyup="StartEditTransactionJSON()" onchange="StartEditTransactionJSON()"></textarea>
                     </div>
-                    <a>
-                        <a href="javascript:void(0)" onclick="SignJSON()" class="animated-button accounts" id="idSignJSON">Sign JSON</a>
-                        <a href="javascript:void(0)" onclick="SendMoneyJSON()" class="animated-button accounts" >Send from JSON</a>
+                    <div>
+                        <button onclick="SignJSON()" class="animated-button accounts" id="idSignJSON">Sign JSON</button>
+                        <button onclick="SendMoneyJSON()" class="animated-button accounts" >Send from JSON</button>
                     </div>
 
                 </div>
@@ -275,44 +235,40 @@
                 </script>
 
             </div>
-
-            <DIV class="row" id="TabHistory" style="display: none;">
-            </DIV>
-
-
+            <div class="row" id="TabHistory" style="display: none;"></div>
             <DIV class="row" id="TabDapps" style="display: none">
 
-
-                <BR>
                 <DIV id="idPaginationDapps" style="display: block">
                     <!--Category:-->
                     <!--<select size="1" id="idCategory" onchange="ViewCurrent(DefDapps)">-->
                     <!--</select>-->
-                    <!--<BR>-->
+                    <div>
+                        <button onclick="ViewBegin(DefDapps)" class="animated-button accounts">|<-</button>
+                        <button onclick="ViewPrev(DefDapps)" class="animated-button accounts" ><< Prev</button>
+                        <input type="number" id="idViewDappNum" class="inputStl" value="0" min=0 max=1000000000 onchange="ViewCurrent(DefDapps)">
+                        <button onclick="ViewNext(DefDapps,CONFIG_DATA.MaxDappsID)" class="animated-button accounts">Next >></button>
+                        <button onclick="ViewEnd(DefDapps,CONFIG_DATA.MaxDappsID)" class="animated-button accounts">->|</button>
+                        <button class="animated-button accounts" onclick="ConnectWebWallet(3)"> Reconnect</button>
+                    </div>
+                    <div>
+                        <div id="idStatus4" class="status2" style="display:none;"></div>
+                    </div>
 
-                    <input type="button" onclick="ViewBegin(DefDapps)" class="btdoitm bt" value="|<-">
-                    <input type="button" onclick="ViewPrev(DefDapps)" class="btdoit bt" value="<< Prev">
-                    <input type="number" id="idViewDappNum" style="text-align: center" value="0" min=0 max=1000000000 onchange="ViewCurrent(DefDapps)">
-                    <input type="button" onclick="ViewNext(DefDapps,CONFIG_DATA.MaxDappsID)" class="btdoit bt" value="Next >>">
-                    <input type="button" onclick="ViewEnd(DefDapps,CONFIG_DATA.MaxDappsID)" class="btdoitm bt" value="->|">
-
-                    <table id="dapps_list" class="grid">
-                        <tr>
-                            <th id="(RetNumDapp(Item))" class="num">ID</th>
-                            <th id="(RetOpenDapps(Item,0,0))" class="dappname">Name</th>
-                            <th id="Item.Description" class="code dappdesc">Description</th>
-                            <th id="(RetCategory(Item))" class="">Category</th>
-
-                            <th id="RetBaseAccount(Item)" class="num">Base Account</th>
-                            <th id="Item.Owner" class="num">Owner</th>
-                            <th id="RetBool(Item.TokenGenerate)" class="bool">Token generate</th>
-                            <!--<th id="Item.ISIN" class="num">ISIN</th>-->
-                            <th id="(RetOpenBlock(Item.BlockNum,1))" class="num">Block Num</th>
-
-                        </tr>
-                    </table>
-
-
+                    <div class="w100p">
+                        <table id="dapps_list" class="grid">
+                            <tr>
+                                <th id="(RetNumDapp(Item))" class="num">ID</th>
+                                <th id="(RetOpenDapps(Item,0,0))" class="dappname">Name</th>
+                                <th id="Item.Description" class="code dappdesc">Description</th>
+                                <th id="(RetCategory(Item))" class="">Category</th>
+                                <th id="RetBaseAccount(Item)" class="num">Base Account</th>
+                                <th id="Item.Owner" class="num">Owner</th>
+                                <th id="(RetBool(Item.TokenGenerate))" class="bool">Token generate</th>
+                                <!--<th id="Item.ISIN" class="num">ISIN</th>-->
+                                <th id="(RetOpenBlock(Item.BlockNum,1))" class="num">Block Num</th>
+                            </tr>
+                        </table>
+                    </div>
                 </DIV>
 
             </DIV>
@@ -389,20 +345,24 @@
                 <BR>
 
             </DIV>
+
         </div>
     </div>
-    <DIV id="idBlockOnSend" style="display: none">
-        <DIV align="center">
-            Send <B id="idOnSendText"></B> ?
-            <BR>
-            <button onclick="SendMoney2()" id="idBtOnSend" class="radius">Send</button>
-            <button onclick='SetVisibleBlock("idBlockOnSend",0);' class="radius">Cancel</button>
-            <BR>
+    <div id="idBlockOnSend" style="display: none">
+    <!--<div id="idBlockOnSend">-->
+        <div align="center">
+            <div>
+                Send <strong id="idOnSendText"></strong> ?
+            </div>
+           <div>
+               <button onclick="SendMoney2()" id="idBtOnSend" class="animated-button accounts">Send</button>
+               <button onclick='SetVisibleBlock("idBlockOnSend",0);' class="animated-button accounts">Cancel</button>
+           </div>
             <DIV align="left">
                 <DIV style="font-size: smaller"><input type="checkbox" id="idWhiteOnSend"/> Add this account to white list</DIV>
             </DIV>
-        </DIV>
-    </DIV>
+        </div>
+    </div>
 
     <!--<DIV id="idStableScroll" align='center'>-->
         <!--<A href="https://terafoundation.org/">Web</A>-->

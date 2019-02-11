@@ -1,11 +1,11 @@
 .status{
-    color:rgba(255, 255, 255, 0.5);
+    color:rgba(255, 255, 255, 0.7);
     height: 218px;
     overflow-y: auto;
     word-wrap:break-word;
 }
 .status2{
-    color:rgba(255, 255, 255, 0.5);
+    color:rgba(255, 255, 255, 0.7);
     height: 27px;
     margin-bottom: 10px;
     overflow-y: auto;
@@ -31,8 +31,16 @@ a:hover .discord{
     width: 28px;
     height: 28px;
 }
-
-a.animated-button:link, a.animated-button:visited {
+.animated-button{
+    background:transparent;
+}
+.animated-button[disabled]{
+    background:#ccc;
+    border: 1px solid #ccc!important;
+    color: #999;
+    text-shadow: none;
+}
+a.animated-button:link, a.animated-button:visited,.animated-button {
     position: relative;
     display: block;
     color: #fff;
@@ -50,7 +58,7 @@ a.animated-button:link, a.animated-button:visited {
     -o-transition: all 1s ease;
     transition: all 1s ease;
 }
-a.animated-button:link:after, a.animated-button:visited:after {
+a.animated-button:link:after, a.animated-button:visited:after,.animated-button:after {
     content: "";
     position: absolute;
     height: 0%;
@@ -63,15 +71,15 @@ a.animated-button:link:after, a.animated-button:visited:after {
     -o-transition: all 0.75s ease 0s;
     transition: all 0.75s ease 0s;
 }
-a.animated-button:link:hover, a.animated-button:visited:hover {
+a.animated-button:link:hover, a.animated-button:visited:hover,.animated-button:hover {
     color: #000;
     text-shadow: none;
 }
-a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+a.animated-button:link:hover:after, a.animated-button:visited:hover:after, .animated-button:hover:after {
     height: 450%;
 }
 
-a.animated-button.victoria-two {
+a.animated-button.victoria-two,.animated-button.victoria-two {
     border:1px solid #94FF00;
     width: 250px;
     margin: 0 auto 30px ;
@@ -79,7 +87,7 @@ a.animated-button.victoria-two {
     padding: 14px 15px;
     display: inline-block;
 }
-a.animated-button.victoria-two:after {
+a.animated-button.victoria-two:after,.animated-button.victoria-two:after {
     background: rgba(148,255,0,1);
     -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
     -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
@@ -87,7 +95,7 @@ a.animated-button.victoria-two:after {
     transform: translateX(-50%) translateY(-50%) rotate(25deg);
 }
 
-a.animated-button.accounts {
+a.animated-button.accounts,.animated-button.accounts {
     border:1px solid #94FF00;
     outline: none;
     display: inline-block!important;
@@ -95,7 +103,7 @@ a.animated-button.accounts {
     vertical-align:top;
     margin-bottom: 10px;
 }
-a.animated-button.accounts:after {
+a.animated-button.accounts:after,.animated-button.accounts:after {
     background: rgba(148,255,0,1);
     -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
     -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);

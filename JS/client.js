@@ -383,18 +383,16 @@ function CheckNewSearch(e)
     $(e.FilterName).value && ($(e.NumName).value = "0");
 };
 
-function ViewCurrent(e,t,r)
-{
-    if(e.BlockName)
-    {
+function ViewCurrent(e,t,r) {
+    if(e.BlockName) {
         var n = $(e.BlockName);
         if(t)
         {
             var a = IsVisibleBlock(e.BlockName);
-            a || MoveUp(n), SetVisibleBlock(e.BlockName, !a);
+            a || MoveUp(n), SetVisibleBlock(e.BlockName, !a,1);
         }
         else
-            SetVisibleBlock(e.BlockName, !0);
+            SetVisibleBlock(e.BlockName, !0,1);
         var o = IsVisibleBlock(e.BlockName);
         if(r && r.className && (r.className = r.className.replace("btpress", ""), o && (r.className += " btpress")), !o)
             return ;
@@ -593,11 +591,17 @@ function AddDiagramToArr(e,t)
     r || (t.num = e.length, e.push(t));
 };
 
-function SetVisibleBlock(e,t)
+function SetVisibleBlock(e,t,s)
 {
     var r = document.getElementById(e);
-    return t && "string" == typeof t ? r.style.display = t : t ? (r.style.display = "block", DoStableScroll()) : r.style.display = "none",
-    r;
+    if(s){
+        $("idPaginationAccount").style.display="none";
+        $("idPaginationBlock").style.display="none";
+        $("idStatBlock").style.display="none";
+    }
+  r.style.display = "block";
+    // return t && "string" == typeof t ? r.style.display = t : t ? (r.style.display = "block", DoStableScroll()) : r.style.display = "none",
+    // r;
 };
 
 function SetVisibleBlock2(e) {

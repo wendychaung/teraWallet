@@ -86,8 +86,8 @@ function ConnectWebWallet(num) {
       case 3:
         $("idStatus4").style.display ="block";
         break;
-      case 5:
-        $("idStatus4").style.display ="block";
+      case 4:
+        $("idStatus5").style.display ="block";
         break;
     }
     for(var e in StartTimeConnecting = Date.now(), ConnectedCount = 0, ServerMap)

@@ -32,8 +32,8 @@ function OnLoad()
     }
   }
 }
-function ChangeNetwork()
-{
+function ChangeNetwork() {
+
   if(NETWORK==="TERA-TEST")
   {
     NETWORK="TERA-MAIN";

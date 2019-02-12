@@ -16,14 +16,12 @@ MaxTimeConnecting = 3e3, StartTimeConnecting = 0, ConnectedCount = 0, NETWORK = 
         port:80, Name:"LOCAL"}, "91.235.136.81":{ip:"91.235.136.81", port:88, Name:"SUPPORT1", System:1}, "149.154.70.158":{ip:"149.154.70.158",
         port:88, Name:"SUPPORT2", System:1}};
 
-function StartWebWallet()
-{
+function StartWebWallet() {
     ServerMap = "TERA-TEST" === NETWORK ? (MIN_SUM_POWER = 0, ServerTestMap) : (MIN_SUM_POWER = 35 * COUNT_BLOCK_PROOF, ServerMainMap),
-    $("idNetwork").innerText = NETWORK, OnInitWebWallet(), ConnectWebWallet();
-};
+    $("idNetwork").innerText = NETWORK, OnInitWebWallet(), ConnectWebWallet(0);
+}
 
-function OnInitWebWallet()
-{
+function OnInitWebWallet() {
     var e = localStorage.getItem(NETWORK + "NodesArrayList");
     if(e)
         for(var t = JSON.parse(e), r = 0; r < t.length; r++)
@@ -31,7 +29,7 @@ function OnInitWebWallet()
             var o = ServerMap[t[r].ip];
             o && o.System || (ServerMap[t[r].ip] = t[r]);
         }
-};
+}
 
 function SaveServerMap()
 {
@@ -74,10 +72,24 @@ function SetError(e,t)
 };
 
 function ConnectWebWallet(num) {
-    num==1?$("idStatus2").style.display ="block":$("idStatus2").style.display ="none";
-    num==2?$("idStatus3").style.display ="block":$("idStatus3").style.display ="none";
-    num==3?$("idStatus4").style.display ="block":$("idStatus4").style.display ="none";
-    num==4?$("idStatus5").style.display ="block":$("idStatus5").style.display ="none";
+  $("idStatus2").style.display ="none";
+  $("idStatus3").style.display ="none";
+  $("idStatus4").style.display ="none";
+  $("idStatus5").style.display ="none";
+    switch(num){
+      case 1:
+        $("idStatus2").style.display ="block";
+          break;
+      case 2:
+        $("idStatus3").style.display ="block";
+        break;
+      case 3:
+        $("idStatus4").style.display ="block";
+        break;
+      case 5:
+        $("idStatus4").style.display ="block";
+        break;
+    }
     for(var e in StartTimeConnecting = Date.now(), ConnectedCount = 0, ServerMap)
     {
         ServerMap[e].SendHandShake = 0;

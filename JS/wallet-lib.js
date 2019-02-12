@@ -60,7 +60,7 @@ function (e)
 function SetNameAccTo()
 {
     var e = ParseNum($("idTo").value), t = $("idNameTo"), n = MapAccounts[e], a = "To: " + GetAccountText(n, e, 1);
-    t.innerText !== a && (t.innerText = a, n && n.MyAccount ? t.className = "smallbold" : t.className = "");
+    t.value !== a && (t.value = a, n && n.MyAccount ? t.className = "smallbold" : t.className = "");
 };
 
 function GetAccountText(e,t,n)
@@ -88,7 +88,7 @@ function OnEditTransactionFields()
 function SetCurCurencyName()
 {
     var e = ParseNum($("idAccount").value), t = MapAccounts[e];
-    t && ($("idCoinName").innerText = CurrencyName(t.Currency));
+    t && ($("idCoinName").value = CurrencyName(t.Currency));
 };
 
 function CreateTransaction(t,e,n)
@@ -152,7 +152,7 @@ function CheckSending(e)
         i && i.NextSendTime && i.NextSendTime > MaxBlockNum && (e && SetStatus("Transaction was sending. Wait... (" + i.LastTransactionText + ")"),
         t = !1, n = "Wait...");
     }
-    return $("idSendButton").disabled = !t, $("idSendButton").innerText = n, $("idSignJSON").disabled = !t, $("idSignJSON").value = a,
+    return $("idSendButton").disabled = !t, $("idSendButton").value = n, $("idSignJSON").disabled = !t, $("idSignJSON").value = a,
     t;
 };
 
@@ -172,7 +172,7 @@ function SendMoneyBefore()
         else
         {
             var n = " to " + GetAccountText(t, e);
-            $("idWhiteOnSend").checked = 0, $("idOnSendText").innerText = $("idSumSend").value + " " + $("idCoinName").innerText + n, SetVisibleBlock("idBlockOnSend",
+            $("idWhiteOnSend").checked = 0, $("idOnSendText").value = $("idSumSend").value + " " + $("idCoinName").value + n, SetVisibleBlock("idBlockOnSend",
             1), SetImg(this, "idBlockOnSend");
         }
     }

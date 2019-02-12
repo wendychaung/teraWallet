@@ -128,8 +128,7 @@ function IsMS()
     return 0 < window.navigator.userAgent.indexOf("MSIE ") || navigator.userAgent.match(/Trident.*rv\:11\./) ? 1 : 0;
 };
 
-function LoadSignLib()
-{
+function LoadSignLib() {
     window.SignLib || LoadLib("./JS/sign-lib-min.js");
 };
 

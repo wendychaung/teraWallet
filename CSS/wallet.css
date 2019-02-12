@@ -33,7 +33,7 @@ table th{
 table td{
     text-align: left;
     padding:10px;
-    word-wrap:break-word;
+    word-wrap:break-word!important;
 
 }
 table tr:nth-child(odd){background:#393939;}
@@ -210,24 +210,20 @@ table tr:nth-child(even){background:#333;}
     /*text-align: left;*/
     /*word-break: break-all;*/
 /*}*/
-/*.hash*/
-/*{*/
-    /*width: 270px;*/
-    /*font-family: "courier new", "times new roman", monospace;*/
-    /*font-size: 60%;*/
-    /*align-content: left;*/
-    /*text-align: left;*/
-    /*word-break: break-all;*/
-/*}*/
-/*.pubkey*/
-/*{*/
-    /*width: 180px;*/
-    /*font-family: "courier new", "times new roman", monospace;*/
-    /*font-size: 75%;*/
-    /*align-content: left;*/
-    /*text-align: left;*/
-    /*word-break: break-all;*/
-/*}*/
+.hash {
+    width: 270px;
+    font-family: "courier new", "times new roman", monospace;
+    font-size: 60%;
+    align-content: left;
+    text-align: left;
+    word-break: break-all;
+}
+.pubkey
+ {
+     width: 180px;
+     font-size: 75%;
+
+ }
 
 /*.accname*/
 /*{*/
@@ -927,4 +923,11 @@ select{
     background: #94ff00;
     color: #000000;
 
+}
+.canvasbrdr{
+    background: #000;
+    padding: 5px 0;
+}
+#BDgrmId1{
+    margin:10px 0  40px;
 }

@@ -60,10 +60,12 @@ function SetStatus(e)
     $("idStatus2").append(parseDom(str));
     $("idStatus3").append(parseDom(str));
     $("idStatus4").append(parseDom(str));
+    $("idStatus5").append(parseDom(str));
   $("idStatus").scrollTop = $("idStatus").scrollHeight;
   $("idStatus2").scrollTop = $("idStatus2").scrollHeight;
   $("idStatus3").scrollTop = $("idStatus3").scrollHeight;
   $("idStatus4").scrollTop = $("idStatus4").scrollHeight;
+  $("idStatus5").scrollTop = $("idStatus5").scrollHeight;
 };
 
 function SetError(e,t)
@@ -75,6 +77,7 @@ function ConnectWebWallet(num) {
     num==1?$("idStatus2").style.display ="block":$("idStatus2").style.display ="none";
     num==2?$("idStatus3").style.display ="block":$("idStatus3").style.display ="none";
     num==3?$("idStatus4").style.display ="block":$("idStatus4").style.display ="none";
+    num==4?$("idStatus5").style.display ="block":$("idStatus5").style.display ="none";
     for(var e in StartTimeConnecting = Date.now(), ConnectedCount = 0, ServerMap)
     {
         ServerMap[e].SendHandShake = 0;

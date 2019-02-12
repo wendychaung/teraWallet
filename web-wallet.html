@@ -22,7 +22,6 @@
     <script type="text/javascript" src="./JS/wallet-lib.js"></script>
     <script type="text/javascript" src="./JS/diagram.js"></script>
     <script type="text/javascript" src="./JS/main.js"></script>
-
     <!--<script type="text/javascript" src="./JS/sign-lib-min.js"></script>-->
 
     <script>
@@ -65,8 +64,6 @@
         //SEND
         setInterval(CheckSending,1000);
     </script>
-
-
 </head>
 <body>
 
@@ -275,11 +272,12 @@
                 <!--<iframe src="/explorer.html" style="width: 100%;height: 100vh"></iframe>-->
                 <DIV id="idCurrentBlockNum"></DIV>
 
-                <button onclick="ViewCurrent(DefAccounts,1,this);" class="btview">Accounts</button>
-                <button onclick="ViewCurrent(DefBlock,1,this)" class="btview">Blocks & Tr</button>
+                <button onclick="ViewCurrent(DefAccounts,1,this);" class="animated-button accounts">Accounts</button>
+                <button onclick="ViewCurrent(DefBlock,1,this)" class="animated-button accounts">Blocks & Tr</button>
                 <!--<button onclick="ViewCurrent(DefBlock,1,this)" class="btview">DApps</button>-->
-                <button onclick="ViewCounters(this)" class="btview">Counters</button>
-
+                <button onclick="ViewCounters(this)" class="animated-button accounts">Counters</button>
+                <button class="animated-button accounts" onclick="ConnectWebWallet(4)"> Reconnect</button>
+                <div id="idStatus5" class="status2" style="display:none;"></div>
                 <div>
                     <DIV id="idPaginationAccount" style="display: none">
                         <BR>
@@ -306,24 +304,25 @@
                     <DIV id="idPaginationBlock" style="display: none">
                         <BR>
                         <DIV>Blocks<BR></DIV>
-                        <button onclick="ViewBegin(DefBlock)" class="btnav">|<-</button>
-                        <button onclick="ViewPrev(DefBlock)" class="btnav"><< Prev</button>
-                        <input type="number" class="pag_num" id="idViewBlockNum" style="text-align: center" value="0" min=0 onchange="ViewCurrent(DefBlock)">
-                        <button onclick="ViewNext(DefBlock,CONFIG_DATA.MaxNumBlockDB)" class="btnav">Next >></button>
-                        <button onclick="ViewEnd(DefBlock,CONFIG_DATA.MaxNumBlockDB)" class="btnav">->|</button>
-
-                        <table id="explorer_blocks" class="grid">
-                            <tr>
-                                <th id="(RetOpenBlock(Item.BlockNum,Item.TrDataLen))" class="num">Num</th>
-                                <th id="(DateFromBlock(Item.BlockNum))" class="date">Date</th>
-                                <th id="GetHexFromArr(Item.TreeHash)" class="hash">Data Hash</th>
-                                <th id="GetHexFromArr(Item.PowHash)" class="hash">PowHash</th>
-                                <th id="GetHexFromArr(Item.Hash)" class="hash">Block Hash</th>
-                                <th id="Item.TrDataLen" class="num">Bytes</th>
-                                <th id="Item.Power" class="num">Pow</th>
-                                <th id="Item.Miner" class="num">Miner</th>
-                            </tr>
-                        </table>
+                        <button onclick="ViewBegin(DefBlock)" class="animated-button accounts">|<-</button>
+                        <button onclick="ViewPrev(DefBlock)" class="animated-button accounts"><< Prev</button>
+                        <input type="number" class="inputStl" id="idViewBlockNum" style="text-align: center" value="0" min=0 onchange="ViewCurrent(DefBlock)">
+                        <button onclick="ViewNext(DefBlock,CONFIG_DATA.MaxNumBlockDB)" class="animated-button accounts">Next >></button>
+                        <button onclick="ViewEnd(DefBlock,CONFIG_DATA.MaxNumBlockDB)" class="animated-button accounts">->|</button>
+                        <div class="w100p">
+                            <table id="explorer_blocks" class="grid">
+                                <tr>
+                                    <th id="(RetOpenBlock(Item.BlockNum,Item.TrDataLen))" class="num">Num</th>
+                                    <th id="(DateFromBlock(Item.BlockNum))" class="date">Date</th>
+                                    <th id="GetHexFromArr(Item.TreeHash)" class="hash">Data Hash</th>
+                                    <th id="GetHexFromArr(Item.PowHash)" class="hash">PowHash</th>
+                                    <th id="GetHexFromArr(Item.Hash)" class="hash">Block Hash</th>
+                                    <th id="Item.TrDataLen" class="num">Bytes</th>
+                                    <th id="Item.Power" class="num">Pow</th>
+                                    <th id="Item.Miner" class="num">Miner</th>
+                                </tr>
+                            </table>
+                        </div>
                     </DIV>
 
                     <DIV id="idStatBlock" style="display: none">
@@ -351,17 +350,6 @@
             </DIV>
         </div>
     </div>
-
-    <!--<DIV id="idStableScroll" align='center'>-->
-        <!--<A href="https://terafoundation.org/">Web</A>-->
-        <!--<A href="https://bitcointalk.org/index.php?topic=4573801.0">ANN</A>-->
-        <!--<A href="https://twitter.com/terafoundation">Twitter</A>-->
-        <!--<A href="https://web.telegram.org/#/im?p=@terafoundation">Telegram</A>-->
-        <!--<A href="https://discord.gg/CvwrbeG">Discord</A>-->
-        <!--<A href="https://github.com/terafoundation/wallet">GitHub</A>-->
-        <!--&lt;!&ndash;progr76@gmail.com&ndash;&gt;-->
-    <!--</DIV>-->
-
 </main>
 <script type="text/javascript" src="./JS/custom.js"></script>
 </body>

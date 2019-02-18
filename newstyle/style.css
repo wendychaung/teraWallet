@@ -1,6 +1,7 @@
 .status{
+    width: 100%;
     color:rgba(255, 255, 255, 0.7);
-    height: 218px;
+    height: 200px;
     overflow-y: auto;
     word-wrap:break-word;
 }

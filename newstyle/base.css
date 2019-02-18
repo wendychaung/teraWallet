@@ -296,7 +296,7 @@ textarea {
 }
 .col-twelve {
 	width: 100%;
-	margin-top: 180px;
+	margin-top:50px;
 }
 
 /**
@@ -408,6 +408,11 @@ textarea {
 	[class*="col-"] + [class*="col-"].end {
 		float: none;
 	}
+	.col-twelve {
+		width: 100%;
+		margin-top:40px;
+	}
+
 }
 
 /**

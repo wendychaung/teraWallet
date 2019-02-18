@@ -37,7 +37,6 @@
         function SetImg() {};
         window.onload=function() {
             LoadSignLib();
-
             if(localStorage["NETWORK"] || window.location.protocol==="file:") {
                 OnLoad();
             } else {
@@ -67,12 +66,9 @@
 <body>
 
 <header id="main-header" class="main-header">
-    <div class="row">
-        <div class="logo" id="logo">
-            <a href="javascript:void(0)" onclick="SelectTab('Tabfirst',1)">TERA</a>
-        </div>
+    <div class="logo" id="logo">
+        <a href="javascript:void(0)" onclick="SelectTab('Tabfirst',1)">TERA</a>
     </div>
-
     <a id="menu-toggle" href="javascript:void(0)" onclick="toggleButton(this)" class="menu-toggle"><span>Menu</span></a>
 </header>
 <nav id="menu-nav-wrap" class="">
@@ -85,18 +81,17 @@
         <li><a href="javascript:void(0)" id="MTabExplorer" onclick="SelectTab('TabExplorer',1)">EXPLORER</a></li>
     </ul>
 </nav>
+<div class="shadow-overlay"></div>
 <main id="main-404-content" class="main-content-static">
-
     <div class="content-wrap">
-        <div class="shadow-overlay"></div>
+
         <div class="main-content">
             <div class="row" id="Tabfirst">
                 <div class="col-twelve">
                     <input id="idCurTabName" value="TabInfo" type="hidden">
                     <h1 class="kern-this">tera wallet</h1>
 
-                    <div id="idStatus" class="status">
-                    </div>
+                    <div id="idStatus" class="status"></div>
                     <div class="search">
                         <button id="idNetwork" onclick="ChangeNetwork()" class="animated-button victoria-two">TERA-TEST</button>
                     </div>
@@ -270,11 +265,14 @@
             <div class="row" id="TabExplorer" align="center" style="display: none;">
                 <!--<iframe src="/explorer.html" style="width: 100%;height: 100vh"></iframe>-->
                 <div id="idCurrentBlockNum"></div>
-                <button onclick="ViewCurrent(DefAccounts,1,this);" class="animated-button accounts">Accounts</button>
-                <button onclick="ViewCurrent(DefBlock,1,this)" class="animated-button accounts">Blocks & Tr</button>
-                <!--<button onclick="ViewCurrent(DefBlock,1,this)" class="btview">DApps</button>-->
-                <button onclick="ViewCounters(this)" class="animated-button accounts">Counters</button>
-                <button class="animated-button accounts" onclick="ConnectWebWallet(4)"> Reconnect</button>
+                <div class="explorer">
+                    <button onclick="ViewCurrent(DefAccounts,1,this);" class="animated-button accounts victoria-four">Accounts</button>
+                    <button onclick="ViewCurrent(DefBlock,1,this)" class="animated-button accounts victoria-four">Blocks & Tr</button>
+                    <!--<button onclick="ViewCurrent(DefBlock,1,this)" class="btview">DApps</button>-->
+                    <button onclick="ViewCounters(this)" class="animated-button accounts victoria-four">Counters</button>
+                    <button class="animated-button accounts victoria-four" onclick="ConnectWebWallet(4)"> Reconnect</button>
+                </div>
+
                 <div id="idStatus5" class="status2" style="display:none;"></div>
                 <div>
                     <DIV id="idPaginationAccount" style="display: none">

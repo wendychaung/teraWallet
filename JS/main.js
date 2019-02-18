@@ -2,9 +2,6 @@ function OnLoad()
 {
   if(localStorage["NETWORK"])
     NETWORK=localStorage["NETWORK"];
-
-
-
   LoadValues();
   StartWebWallet();
 
@@ -23,8 +20,7 @@ function OnLoad()
     SetDiagramMouseX(event);
   }
 
-  if(window.location.hash)
-  {
+  if(window.location.hash) {
     var LocationPath=window.location.hash.substr(1);
     if(LocationPath)
     {
@@ -92,11 +88,10 @@ function SelectTab(name,type)
   if(type == 1){
     toggleButton()
   }
-
   if(name!="Tabfirst"){
     $("logo").style.marginTop=20+"px";
   }else{
-    $("logo").style.marginTop=78+"px";
+    $("logo").style.marginTop=60+"px";
   }
   window.location.hash="#"+name;
 }
@@ -114,7 +109,7 @@ function SetVisibleTab()
   var CurTabName=$("idCurTabName").value;
   if(!CurTabName || CurTabName==="undefined")
     CurTabName=TabArr[0].name;
-
+  $(CurTabName).style.height=document.body.clientHeight+"px";
   var str;
   for (var i=0;i<TabArr.length;i++)
   {

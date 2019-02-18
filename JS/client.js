@@ -431,8 +431,7 @@ function GetCountViewRows(e)
     return e.CountViewRows ? e.CountViewRows : CountViewRows;
 };
 
-function DoStableScroll()
-{
+function DoStableScroll() {
     var e = $("idStableScroll");
     if(e)
     {
@@ -440,7 +439,7 @@ function DoStableScroll()
         document.body.clientHeight, document.documentElement.clientHeight);
         t -= Math.max(e.scrollHeight, e.offsetHeight, e.clientHeight), e.style.top = t + "px";
     }
-};
+}
 var glEvalMap = {};
 
 function CreateEval(formula,StrParams)

@@ -479,10 +479,11 @@ label > input[type="checkbox"], label > input[type="radio"] {
 }
 header {
 	/*float: left;*/
-	width: 94%;
-	max-width: 1170px;
-	margin: 0 auto;
+	/*width: 94%;*/
+	/*max-width: 1170px;*/
+	/*margin: 0 auto!important;*/
 	/*height: auto;*/
+	width: 100%;
 	height: 95px;
 	/*position: relative;*/
 	position: absolute;
@@ -521,7 +522,7 @@ header .logo {
 	/*position: absolute;*/
 	/*left: 26px;*/
 	/*top: 0;*/
-	margin: 60px 0 0 26px;
+	margin-top: 60px;
 	width: 200px;
 	float: left;
 }

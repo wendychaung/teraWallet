@@ -44,18 +44,10 @@ table tr:nth-child(even){background:#333;}
     /*height: 100vh;*/
 }
 #Tabfirst,#TabAccounts,#TabSend,#TabHistory,#TabDapps,#TabExplorer{
-     /*height: 100vh;*/
      box-sizing: border-box;
-     /*margin-top: 90px;*/
      overflow-y: auto;
-    /*height: 500px;*/
-    /*height: calc(100vh - 90px);*/
-    /*height: -moz-calc(100vh - 90px);*/
-    /*height: -webkit-calc(100vh - 90px);*/
-
      overflow-x: hidden;
     padding-top: 90px;
-
  }
 
 .smallbold {
@@ -126,6 +118,7 @@ table tr:nth-child(even){background:#333;}
 #TabSend .inputStl,
 #idKeys .inputStl,
 #idAccountCur.selectstl,
+#idAccount.selectstl,
 #TabSend .selectstl,
 #idAccountEdit .inputStl{
     display: inline-block;
@@ -180,13 +173,12 @@ select{
         margin-left: 0!important;
     }
 }
-
-
 @media screen and (max-width:460px) {
     #idKeys .inputBtn,#idKeys .inputStl,
     #TabSend .inputStl,
     #idAccountEdit .inputBtn,#idAccountEdit .inputStl{
             width: 90%;
+        background: #f00;
         }
     .ss-custom-select::after {
         right: 1rem;
@@ -254,4 +246,9 @@ select{
 .animated-button.victoria-four:hover:after {
     opacity: 1;
     height: 600% !important;
+}
+@media only screen and (min-width:600px) {
+    #Tabfirst,#TabAccounts,#TabSend,#TabHistory,#TabDapps,#TabExplorer{
+        padding-top: 130px;
+    }
 }

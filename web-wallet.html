@@ -66,10 +66,13 @@
 <body>
 
 <header id="main-header" class="main-header">
-    <div class="logo" id="logo">
-        <a href="javascript:void(0)" onclick="SelectTab('Tabfirst',1)">TERA</a>
+    <div class="row">
+        <div class="logo" id="logo">
+            <a href="javascript:void(0)" onclick="SelectTab('Tabfirst',1)">TERA</a>
+        </div>
+        <a id="menu-toggle" href="javascript:void(0)" onclick="toggleButton(this)" class="menu-toggle"><span>Menu</span></a>
     </div>
-    <a id="menu-toggle" href="javascript:void(0)" onclick="toggleButton(this)" class="menu-toggle"><span>Menu</span></a>
+
 </header>
 <nav id="menu-nav-wrap" class="">
     <h5>Site Pages</h5>
@@ -177,7 +180,7 @@
                     <li>
                         <label class="label">From account:</label>
                         <div class="ss-custom-select">
-                            <select size="1"  id="idAccount" oninput="OnEditTransactionFields(); CheckSending();"  class="selectstl">
+                            <select size="1"  id="idAccount" oninput="OnEditTransactionFields(); CheckSending();" class="selectstl">
                             </select>
                         </div>
                         <div id="idNameTo" class="smallbold"></div>

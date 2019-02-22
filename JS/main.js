@@ -420,7 +420,7 @@ function ViewCounters(This)
 }
 function downloadKey() {
   var inValue  = $("idPrivKey").value.trim();
-  exportRaw('privateKey.txt', inValue);
+  exportRaw('key.txt', inValue);
 }
 function fakeClick(obj) {
   var ev = document.createEvent("MouseEvents");

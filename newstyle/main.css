@@ -553,13 +553,16 @@ header .logo a {
  * -------------------------------------------------------------------
  */
 .menu-toggle {
-	float: right;
+	/*float: right;*/
 	width: 40px;
 	height: 40px;
-	margin:26px 20px 0 0;
-	display: block;
+	/*margin:26px 20px 0 0;*/
+
+	/*display: block;*/
 	outline: 0;
-	position: relative;
+	position: fixed;
+	top:20px;
+	right:20px;
 }
 .menu-toggle span {
 	display: block;

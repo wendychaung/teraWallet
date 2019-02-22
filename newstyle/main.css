@@ -715,7 +715,7 @@ header .logo a {
 	right: 0;
 	top: 0;
 	visibility: hidden;
-	z-index:99999;
+	z-index:500;
 	overflow-y: auto;
 
 	-webkit-transform: translateZ(0);
@@ -792,15 +792,14 @@ header .logo a {
 }
 
 /* static background */
-body {
-	/*background-image: url(../images/slides/greens.jpg);*/
+#main-404-content {
 	background:url(../images/slides/greens2.jpg);
-	/*background-image: url(../images/slides/greens3.jpeg);*/
 	background-repeat: no-repeat;
 	background-position:center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
+	min-height: 100vh;
 }
 
 /* slideshow background */

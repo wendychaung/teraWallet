@@ -3,6 +3,7 @@ function toggleButton(){
   toggleClassname('menu-nav-wrap','menu-is-open');
   toggleClassname('main-header','menu-is-open');
   toggleClassname('main-404-content','menu-is-open');
+  toggleClassname('body','overflow-hidden');
   // mainContent.toggleClass('menu-is-open').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
   //   // firefox transitions break when parent overflow is changed,
   //   // so we need to wait for the end of the trasition to give the body an overflow hidden

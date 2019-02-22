@@ -45,10 +45,15 @@ table tr:nth-child(even){background:#333;}
 }
 #Tabfirst,#TabAccounts,#TabSend,#TabHistory,#TabDapps,#TabExplorer{
      box-sizing: border-box;
-     overflow-y: auto;
-     overflow-x: hidden;
+     /*overflow-y: auto;*/
+     /*overflow-x: hidden;*/
     padding-top: 90px;
  }
+#TabAccounts .ht,#TabSend .ht,#TabHistory .ht,#TabDapps .ht,#TabExplorer .ht{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
 
 .smallbold {
     font-weight: 600;
@@ -178,12 +183,16 @@ select{
     #TabSend .inputStl,
     #idAccountEdit .inputBtn,#idAccountEdit .inputStl{
             width: 90%;
-        background: #f00;
+
         }
     .ss-custom-select::after {
         right: 1rem;
 
     }
+    .ss-custom-select.slct{
+         width: 90%!important;
+        overflow: hidden;
+     }
     #idAccountCur.selectstl{
         width: 100%;
     }
@@ -224,6 +233,7 @@ select{
 .canvasbrdr{
     background: #000;
     padding: 5px 0;
+    overflow-x: auto;
 }
 #BDgrmId1{
     margin:10px 0  40px;

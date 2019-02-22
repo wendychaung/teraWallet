@@ -158,8 +158,7 @@ function IsPrivateMode()
     return 0;
 }
 
-function SetVisibleItemsKeys(EditFlag)
-{
+function SetVisibleItemsKeys(EditFlag) {
   if(EditFlag)
   {
     $("idPrivKeyEdit").value=$("idPrivKey").value;
@@ -201,13 +200,15 @@ function SetVisibleItemsKeys(EditFlag)
 }
 
 
-function SetPubKey(EditFlag)
-{
+function SetPubKey(EditFlag) {
+
   var StrPrivKey;
   if(EditFlag)
     StrPrivKey=$("idPrivKeyEdit").value.trim();
-  else
+  else{
     StrPrivKey=$("idPrivKey").value.trim();
+  }
+
   if(IsHexStr(StrPrivKey))
   {
     if(StrPrivKey.length===64)

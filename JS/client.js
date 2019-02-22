@@ -597,10 +597,12 @@ function SetVisibleBlock(e,t,s)
         $("idPaginationAccount").style.display="none";
         $("idPaginationBlock").style.display="none";
         $("idStatBlock").style.display="none";
+      r.style.display = "block";
     }
-  r.style.display = "block";
-    // return t && "string" == typeof t ? r.style.display = t : t ? (r.style.display = "block", DoStableScroll()) : r.style.display = "none",
-    // r;
+    else{
+      return t && "string" == typeof t ? r.style.display = t : t ? (r.style.display = "block", DoStableScroll()) : r.style.display = "none",
+      r;
+    }
 };
 
 function SetVisibleBlock2(e) {
@@ -902,8 +904,7 @@ function GetSignFromArr(e,t)
     return GetHexFromArr(SignLib.sign(Buffer.from(n), Buffer.from(r), null, null).signature);
 };
 
-function IsHexStr(e)
-{
+function IsHexStr(e) {
     return !!e && GetHexFromArr(GetArrFromHex(e)) === e.toUpperCase();
 };
 
